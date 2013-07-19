@@ -1,0 +1,7 @@
+development: &development
+  host: 127.0.0.1
+  port: 6379
+
+production:
+  host: 10.180.135.168
+  port: 6382

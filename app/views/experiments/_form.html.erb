@@ -1,0 +1,42 @@
+<div class="row ">
+  <span class="span12"> 
+  <%= form_tag('/experiments', :method => :post, :class=>'medium-space-from-top')  do%>
+    <% if @experiment.errors.any? %>
+      <div id="error_explanation" class="alert alert-block">
+        <h4><%= pluralize(@experiment.errors.count, "error") %> prohibited this dashboard from being saved:</h4>
+
+        <ul>
+        <% @experiment.errors.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Name</label>
+      <div class="controls">
+        <%=text_field_tag "name", "", :placeholder => "Humanized Name"%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Description</label>
+      <div class="controls">
+        <%=text_area_tag "description", "", :placeholder => "What does this experiment slice test?", :rows=>"3"%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Screenshot (optional)</label>
+      <div class="controls">
+        <%=text_field_tag "screenshot", "", :placeholder => "URL"%>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag "Continue", :class=>'btn btn-success btn-large' %>
+    </div>
+  <% end %>
+  </span>
+</div>

@@ -1,0 +1,73 @@
+// Place all the styles related to the Experiments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.experiment-show .hero-unit{
+	padding: 10px 0 26px 40px;
+}
+
+.row.header{
+	padding-left:20px;
+}
+
+.row .subtitle{
+	padding-top:24px;
+}
+
+.small-space-from-top{
+	margin-top:10px;
+}
+
+.medium-space-from-top{
+	margin-top:30px;
+}
+
+.large-space-from-top{
+	margin-top:50px;
+}
+
+.code-comment{
+	color:#aaa;
+}
+
+pre{
+	background-color:#3D3B3B;
+	padding:20px;
+
+	.comment{
+		color:#5A7C70;
+	}
+
+	.function{
+		color:white;
+	}
+	.args{
+		color:rgb(216, 201, 26);
+	}
+	.class-var{
+		color:orange;
+	}
+	.operator{
+		color:lightblue;
+	}
+	.string{
+		color:rgb(189, 142, 44);
+	}
+	.block-do{
+		color:lightblue;
+	}
+}
+
+#error_explanation{
+	color:darkred;
+}
+
+code {
+	font-size: 16px;
+}
+
+td.error {color:red;}
+td.success {color:darkgreen;}
+td.warning {color:orange;}
+td.disabled {color:#bbb;}

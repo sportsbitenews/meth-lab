@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="span8">
+        <h1>Great! Time to grab your slice</h1>
+        <h2><small>Option One: Two Ruby blocks</small></h2>
+    </div>
+    <div class="span2 pull-right">
+          <%= submit_tag "Finish", :class=>'btn btn-success btn-large' %>
+    </div>
+</div>
+<div class="row"><div class="span12">
+<pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class="function">render_control_version(</span><span class="args experiment-id"><%=params[:id]%></span><span class="function">)</span> <span class='block-do'>do</span>
+<span class='comment'>  # your code for the control group goes here... (people who will see the
+  # default version of your site)</span>
+  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Order Pizza Now!"</span>
+<span class="function">end</span>
+
+<span class="function">render_experiment_version(</span><span class="args experiment-id"><%=params[:id]%></span><span class="function">)</span> <span class='block-do'>do</span>
+<span class='comment'>  # your code for the experiment group goes here... ( people who will see a new 
+  # version of your site)</span>
+  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Get Your Pizzas Here..."</span>
+<span class="function">end</span>
+</code></pre>
+  
+      <h2><small>Option Two: Simple, One Function Test</small></h2>
+
+  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='comment'># your code for the control group who get the 
+  # default version of your site here.</span>
+  <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Order Pizza Now!", "Get Your Pizzas Here..."</span><span class="function">)</span> <span class='block-do'>do</span>
+</code></pre>
+
+    <div class="large-space-from-top"></div>
+      <h2>Caching the experiment area? Add this to your cache key</h2>
+  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='class-var'>@my_key = </span><span class="string">"my_existing_key-#{<span class="function">pizza_cache_key</span>}"</span>
+</code></pre>
+
+    </div>
+</div>
