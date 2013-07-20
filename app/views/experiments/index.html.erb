@@ -1,40 +1,18 @@
 <h1>Build Your Pizza</h1>
-  <!-- <button class="btn btn-success">Add Experiment</button> -->
+<%=render :partial => 'slot_machine', :locals => {:slots => @slots}%>
 
-<table class="table table-striped table-bordered table-hover medium-space-from-top">
-  <tr>
-    <th>Experiment Slice</th>
-    <th>Start</th>
-    <th>End</th>
-    <th>Status</th>
-  </tr>
-<% @slots.each do |slot| %>
-  <%-if slot_is_control_group?(slot)-%>
-    <tr>
-      <td>Control Group Slice</td>
-      <td>----</td>
-      <td>----</td>
-      <td><span class="label label-success">Active</span></td>
-    </tr>
-  <%-elsif slot==-1-%>
-    <tr>
-      <td>
-        <a class="btn btn-small btn-success" href="/experiments/new">New Experiment Slice</a>
-      </td>
+<div class="row large-space-from-top">
+  <div class="span6">
+    <h2>Pending Experiment Slices</h2>
+  </div>
+  <div class="span2 pull-right">
+    <td>
+      <a class="btn btn-small btn-success" href="/experiments/new">New Experiment Slice</a>
+    </td>
+  </div>
+</div>
 
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-    </tr>
-  <%-else-%>
-    <tr>
-      <td><%= link_to slot.to_s, experiment_path(slot) %></td>
-      <td>----</td>
-      <td>----</td>
-      <td>Active</td>
-    </tr>    
-  <%-end-%>
+<%=render :partial => 'slice_table', :locals => {:experiments => @pending_experiments, :type=> :pending}%>
 
-<% end %>
-</table>
-<%#= link_to 'New Dashboard', new_dashboard_path %>
+<h2>Compled Experiments</h2>
+<%=render :partial => 'slice_table', :locals => {:experiments => @completed_experiments}%>

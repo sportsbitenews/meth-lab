@@ -24,6 +24,24 @@ class ExperimentsController < ApplicationController
     end
   end
 
+  def activate
+    if (Lacmus::SlotMachine.activate_experiment(params[:id]))
+      flash[:success] = ("Experiment is now active! Check your website.")
+    else
+      flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
+    end
+    redirect_to root_path
+  end
+
+  def delete
+    if (Lacmus::SlotMachine.destroy_experiment(params[:list], params[:id].to_i))
+      flash[:success] = ("Experiment is now active! Check your website.")
+    else
+      flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
+    end
+    redirect_to root_path
+  end
+
   def get_code
   end
 
@@ -75,7 +93,7 @@ class ExperimentsController < ApplicationController
     respond_to do |format|
       if @experiment.errors.empty?
         format.html { 
-            redirect_to get_code_path(experiment_id), :flash => { :success => 'Slice Created Successfully!' } 
+            redirect_to get_code_experiment_path(experiment_id), :flash => { :success => 'Slice Created Successfully!' } 
         }
         format.json { render json: @experiment, status: :created, location: @experiment }
       else

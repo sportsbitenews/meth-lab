@@ -2,9 +2,21 @@ Pizzeria::Application.routes.draw do
 
   # match 'experiments/:experiment_id' => 'experiments#show', :as => :experiment
   # match 'experiments/data/:experiment_id' => 'experiments#experiment_data'
-  match 'experiments/:id/get_code' => 'experiments#get_code', :as => :get_code
+  # match 'experiments/:id/get_code' => 'experiments#get_code', :as => :get_code
   
-  resources :experiments
+  resources :experiments do
+      member do
+        get 'activate'
+        get 'get_code'
+        get 'delete'
+        # post 'crete'
+      end
+
+      collection do
+        # get 'new'
+        # get 'sold'
+      end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
