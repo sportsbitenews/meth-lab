@@ -1,0 +1,39 @@
+<table class="table table-striped table-bordered table-hover medium-space-from-top">
+  <tr>
+    <th>Experiment Slice</th>
+  	<th>ID</th>
+    <th>Start</th>
+    <th>Status</th>
+  </tr>
+  <% slots.each do |slot| %>
+  <%-if slot_is_control_group?(slot)-%>
+    <tr>
+      <td colspan="3">Control Group Slice</td>
+      <td><span class="label label-success">Active</span></td>
+    </tr>
+  <%-elsif slot.blank? || slot==-1-%>
+    <tr>
+      <td>----</td>
+      <td>----</td>
+      <td>----</td>
+      <td>----</td>
+    </tr>
+  <%-else-%>
+      <%-experiment = Lacmus::SlotMachine.get_experiment_from(:active, slot.to_i)-%>
+    <tr>
+      <td><%= link_to experiment[:name], experiment_path(slot) %></td>
+      <td><%=experiment[:experiment_id] if experiment[:experiment_id].present?%></td>      
+      <td>
+        <%- start_time = Time.at(experiment[:start_time_as_int].to_i)-%>
+        <%=start_time.strftime("%d %b, %H:%M")%> (<%=time_ago_in_words(start_time)%> ago)</td>
+      <td>
+         
+        <%=link_to " Active | destroy", delete_experiment_path(experiment[:experiment_id], :list=>'active'), :confirm => "Are you sure?" if experiment.present?%>
+    </td>
+
+    </tr>    
+  <%-end-%>
+
+<% end %>
+
+</table>
