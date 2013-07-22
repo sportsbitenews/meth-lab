@@ -6,38 +6,38 @@
     <th>End</th>
     <th>Status</th>
   </tr>
-  <% experiments.each do |exp_raw| %>
-  	<%-experiment = Marshal.load(exp_raw) rescue nil-%>
-  <%-if slot_is_control_group?(experiment)-%>
-    <tr>
-      <td colspan="4">Control Group Slice</td>
-      <td><span class="label label-success">Active</span></td>
-    </tr>
-  <%-elsif experiment==-1-%>
-    <tr>
-      <td>
-        <a class="btn btn-small btn-success" href="/experiments/new">New Experiment Slice</a>
-      </td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-    </tr>
-  <%-else-%>
-    <tr>
-      <td><%= link_to experiment[:name], experiment_path(experiment[:experiment_id]) %></td>
-      <td><%=experiment[:experiment_id] if experiment[:experiment_id].present?%></td>
-      <td><%=experiment[:start_time_as_int].to_s%></td>
-      <td><%=experiment[:end_time_as_int].to_s%></td>
-      <td>
-        <span class="pull-right">
-        <%=link_to 'activate', activate_experiment_path(experiment[:experiment_id]) if type == :pending%>
-        -
-        <%=link_to("destroy", delete_experiment_path(experiment[:experiment_id]), :confirm => "Are you sure?")%>
-        </span>
-      </td>
-    </tr>    
-  <%-end-%>
+  <% experiments.each do |experiment| %>
+      <%-if slot_is_control_group?(experiment)-%>
+        <tr>
+          <td colspan="4">Control Group Slice</td>
+          <td><span class="label label-success">Active</span></td>
+        </tr>
+      <%-elsif experiment==-1-%>
+        <tr>
+          <td>
+            <a class="btn btn-small btn-success" href="/experiments/new">New Experiment Slice</a>
+          </td>
+          <td>----</td>
+          <td>----</td>
+          <td>----</td>
+          <td>----</td>
+        </tr>
+      <%-else-%>
+        <tr>
+          <td><%= link_to experiment[:name], experiment_path(experiment[:experiment_id]) %></td>
+          <td><%=experiment[:experiment_id] if experiment[:experiment_id].present?%></td>
+          
+          <td><%= nice_datetime(experiment[:start_time_as_int])%> (<%=time_ago_from_int(experiment[:start_time_as_int])%>)</td>
+          <td><%=experiment[:end_time_as_int].to_s%></td>
+          <td>
+            <span class="pull-right">
+            <%=link_to 'activate', activate_experiment_path(experiment[:experiment_id]) if type == :pending%>
+            -
+            <%=link_to( "destroy", delete_experiment_path(experiment[:experiment_id], :list => type.to_s), :confirm => "Are you sure?")%>
+            </span>
+          </td>
+        </tr>    
+      <%-end-%>
 
 <% end %>
 

@@ -1,4 +1,5 @@
-<h1>Build Your Pizza</h1>
+<h1>Active Experiment Slices</h1>
+<h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
 <%=render :partial => 'slot_machine', :locals => {:slots => @slots}%>
 
 <div class="row large-space-from-top">
@@ -7,7 +8,7 @@
   </div>
   <div class="span2 pull-right">
     <td>
-      <a class="btn btn-small btn-success" href="/experiments/new">New Experiment Slice</a>
+      <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Slice</a>
     </td>
   </div>
 </div>
@@ -15,4 +16,4 @@
 <%=render :partial => 'slice_table', :locals => {:experiments => @pending_experiments, :type=> :pending}%>
 
 <h2>Compled Experiments</h2>
-<%=render :partial => 'slice_table', :locals => {:experiments => @completed_experiments}%>
+<%=render :partial => 'slice_table', :locals => {:experiments => @completed_experiments, :type=> :completed}%>

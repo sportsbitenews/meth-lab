@@ -1,5 +1,11 @@
 <h1>Configure Experiment Slice</h1>
 
-<%= render 'form' %>
+<div class="row ">
+  <span class="span12"> 
+  <%= form_tag('/experiments', :method => :post, :class=>'medium-space-from-top')  do%>
+  	<%= render 'form' %>
+  <% end %>
+  </span>
+</div>
 
 <%= link_to 'Back', experiments_path %>

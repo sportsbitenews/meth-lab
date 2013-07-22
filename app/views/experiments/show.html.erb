@@ -1,11 +1,10 @@
 <div class="experiment-show">
 
 <div class="row header">
-	<h1><%=@experiment.title.titleize%></h1>
-
+	<h1><%=@experiment.name.titleize%></h1>
 	<p class="subtitle">
-		<code>(<%=@experiment.title%>)</code>
-		<span class="pull-right">Experiment Start Time: -----</span>
+		<code>(<%=@experiment.id%>)</code>
+		<span class="pull-right">Experiment Start Time: <%=nice_datetime(@experiment.start_time)%></span>
 	</p>
 </div>
 
@@ -13,20 +12,21 @@
 	<div class="hero-unit span5">
 		<h1>A</h1>
 		<strong>Contorl Group</strong><br/>
-		<%=@experiment.description_a %>
+		Control Group, Showing Original Version
 	</div>
 
 	<div class="hero-unit span6">
 		<h1>B</h1>
 		<strong>Test Group</strong><br/>
-		<%=@experiment.description_b %>
+		<%=@experiment.description %>
 	</div>
 </div>
-<div data-ajax="true" data-target="/experiments/data/<%=@experiment.title%>" data-interval="3">
+<div data-ajax="true" data-target="/experiments/data/<%=@experiment.id%>" data-interval="3">
 	<%=render :partial => 'experiment_data', :locals => {:experiment => @experiment}%>
 </div>
 
 <%= link_to 'Delete', '#' %> |
+<%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |
 <%= link_to 'Back', experiments_path %>
 
 </div>

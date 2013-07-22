@@ -20,20 +20,19 @@
     </tr>
   <%-else-%>
       <%-experiment = Lacmus::SlotMachine.get_experiment_from(:active, slot.to_i)-%>
+      <%- experiment = {:experiment_id => slot.to_i, :name => '-- ERROR --'} if experiment == {}-%>
     <tr>
-      <td><%= link_to experiment[:name], experiment_path(slot) %></td>
+      <td><%= link_to (experiment[:name].to_s), experiment_path(slot) %></td>
       <td><%=experiment[:experiment_id] if experiment[:experiment_id].present?%></td>      
       <td>
-        <%- start_time = Time.at(experiment[:start_time_as_int].to_i)-%>
-        <%=start_time.strftime("%d %b, %H:%M")%> (<%=time_ago_in_words(start_time)%> ago)</td>
-      <td>
-         
-        <%=link_to " Active | destroy", delete_experiment_path(experiment[:experiment_id], :list=>'active'), :confirm => "Are you sure?" if experiment.present?%>
-    </td>
+        <%= nice_datetime(experiment[:start_time_as_int])%> (<%=time_ago_from_int(experiment[:start_time_as_int])%>)</td>
 
+      <td>
+        <%=link_to "destroy", delete_experiment_path(experiment[:experiment_id], :list=>'active'), :confirm => "Are you sure?" if experiment.present?%>
+        <%=link_to( "conclude", conclude_experiment_path(experiment[:experiment_id]), :confirm => "Are you sure?")%>
+
+    </td>
     </tr>    
   <%-end-%>
-
 <% end %>
-
 </table>

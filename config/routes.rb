@@ -8,15 +8,22 @@ Pizzeria::Application.routes.draw do
       member do
         get 'activate'
         get 'get_code'
+        get 'conclude'
         get 'delete'
         # post 'crete'
       end
 
       collection do
-        # get 'new'
-        # get 'sold'
       end
   end
+
+  resources :settings do
+    collection do
+      get 'edit'
+      put 'update'
+    end
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

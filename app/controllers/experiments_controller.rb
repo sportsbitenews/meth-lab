@@ -1,8 +1,10 @@
 class ExperimentsController < ApplicationController
-  
+
   # GET /experiments
   # GET /experiments.json
   def index
+    simple_experiment(19, 'control', 'exp')
+
     @slots = Lacmus::SlotMachine.experiment_slots
     @pending_experiments = Lacmus::SlotMachine.get_experiments(:pending)
     @completed_experiments = Lacmus::SlotMachine.get_experiments(:completed)
@@ -18,7 +20,17 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-     respond_to do |format|
+    @experiment = Lacmus::Experiment.new(params[:id])
+    # @experiment_group = Lacmus::SlotMachine.find_experiment(params[:id])
+    # @control_group = Lacmus::SlotMachine.get_control_group
+    # if @experiment.empty?
+    #   flash[:error] = "Failed to find this experiment"
+    #   redirect_to root_path and return
+    # end
+
+    # # @experiment_kpis = Lacmus::Experiment.load_experiment_kpis(params[:id])
+    # @control_group = Lacmus::SlotMachine.get_control_group
+    respond_to do |format|
       format.html # show.html.erb
       # format.json { render json:  }
     end
@@ -55,7 +67,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/new
   # GET /experiments/new.json
   def new
-    @experiment = Lacmus::ExperimentSlice.new
+    @experiment = Lacmus::Experiment.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,14 +77,10 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
+    @experiment = Lacmus::Experiment.new(params[:id])
   end
 
-  experiment_id = # POST /experiments
-  # POST /experiments.experiment_idson
-  def create
-
-    @experiment = Lacmus::ExperimentSlice.new
-
+  def validate_experiment
     if params[:name].blank? || params[:name].length < 3
       @experiment.errors << "name does not exist or is too short"
     end
@@ -84,7 +92,15 @@ class ExperimentsController < ApplicationController
     if params[:screenshot].present? && params[:screenshot].length < 3
       @experiment.errors << "screenshot should be a URL does not exist or is too short"
     end
-      
+  end
+
+  # POST /experiments
+  # POST /experiments.experiment_idson
+  def create
+
+    @experiment = Lacmus::Experiment.new
+    validate_experiment
+
     if  @experiment.errors.empty?
       experiment_id = Lacmus::SlotMachine.create_experiment(params[:name], params[:description])
       @experiment.errors << "failed to create experiment" unless experiment_id
@@ -106,7 +122,28 @@ class ExperimentsController < ApplicationController
   # PUT /experiments/1
   # PUT /experiments/1.json
   def update
+    @experiment = Lacmus::Experiment.new(params[:id])
+    validate_experiment
 
+    if @experiment.errors.empty?
+      # success = Lacmus::SlotMachine.update_experiment(params[:name], params[:description], params[:screenshot_url])
+      @experiment.name = params[:name]
+      @experiment.description = params[:description]
+      @experiment.screenshot_url = params[:screenshot_url]
+      unless @experiment.save
+        @experiment.errors << "failed to create experiment"
+      end
+    end
+
+    respond_to do |format|
+      if @experiment.errors.empty?
+        format.html do
+          redirect_to root_path
+        end
+      else
+        format.html { render action: "edit" }
+      end
+    end
     # respond_to do |format|
     #     format.html { redirect_to @dashboard, notice: 'Dashboard was successfully updated.' }
     #     format.json { head :no_content }
@@ -115,6 +152,12 @@ class ExperimentsController < ApplicationController
     #     format.json { render json: @dashboard.errors, status: :unprocessable_entity }
     #   end
     # end
+  end
+
+  def conclude
+    # @experiment = Experiment.new(params[:id])
+    Lacmus::SlotMachine.deactivate_experiment(params[:id])
+    redirect_to root_path
   end
 
   # DELETE /experiments/1
