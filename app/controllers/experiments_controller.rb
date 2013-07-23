@@ -3,11 +3,6 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    @headline = simple_experiment(27, 'control', 'exp')
-    mark_kpi!('mooo')
-    # @test_2 = simple_experiment(23, 'control', 'exp')
-    # @test_3 = simple_experiment(23, 'control', 'exp')
-
     @slots = Lacmus::SlotMachine.experiment_slots
     @pending_experiments = Lacmus::Experiment.all_from(:pending)
     @completed_experiments = Lacmus::Experiment.all_from(:completed)
@@ -62,7 +57,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/new
   # GET /experiments/new.json
   def new
-    @experiment = Lacmus::Experiment.new
+    @experiment = Lacmus::Experiment.new(nil)
 
     respond_to do |format|
       format.html # new.html.erb

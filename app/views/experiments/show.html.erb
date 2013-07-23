@@ -25,8 +25,9 @@
 	<%=render :partial => 'experiment_data', :locals => {:experiment => @experiment}%>
 </div>
 
-<%= link_to 'Delete', '#' %> |
 <%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |
+<%=link_to "Destroy", delete_experiment_path(@experiment.id, :list=>'active'), :confirm => "Are you sure?"%> | 
+<%=link_to "Conclude", conclude_experiment_path(@experiment.id, :confirm => "Are you sure?")%>
 <%= link_to 'Back', experiments_path %>
 
 </div>
