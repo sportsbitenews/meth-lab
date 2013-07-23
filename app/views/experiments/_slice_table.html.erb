@@ -24,16 +24,16 @@
         </tr>
       <%-else-%>
         <tr>
-          <td><%= link_to experiment[:name], experiment_path(experiment[:experiment_id]) %></td>
-          <td><%=experiment[:experiment_id] if experiment[:experiment_id].present?%></td>
+          <td><%= link_to experiment.name, experiment_path(experiment.id) %></td>
+          <td><%=experiment.id%></td>
           
-          <td><%= nice_datetime(experiment[:start_time_as_int])%> (<%=time_ago_from_int(experiment[:start_time_as_int])%>)</td>
-          <td><%=experiment[:end_time_as_int].to_s%></td>
+          <td><%= nice_datetime(experiment.start_time)%> (<%=time_ago_from_int(experiment.start_time)%>)</td>
+          <td><%= nice_datetime(experiment.end_time)%> (<%=time_ago_from_int(experiment.end_time)%>)</td>
           <td>
             <span class="pull-right">
-            <%=link_to 'activate', activate_experiment_path(experiment[:experiment_id]) if type == :pending%>
+            <%=link_to 'activate', activate_experiment_path(experiment.id) if type == :pending%>
             -
-            <%=link_to( "destroy", delete_experiment_path(experiment[:experiment_id], :list => type.to_s), :confirm => "Are you sure?")%>
+            <%=link_to( "destroy", delete_experiment_path(experiment.id, :list => type.to_s), :confirm => "Are you sure?")%>
             </span>
           </td>
         </tr>    

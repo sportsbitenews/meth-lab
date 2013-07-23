@@ -3,14 +3,14 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    simple_experiment(19, 'control', 'exp')
+    @headline = simple_experiment(27, 'control', 'exp')
+    mark_kpi!('mooo')
+    # @test_2 = simple_experiment(23, 'control', 'exp')
+    # @test_3 = simple_experiment(23, 'control', 'exp')
 
     @slots = Lacmus::SlotMachine.experiment_slots
-    @pending_experiments = Lacmus::SlotMachine.get_experiments(:pending)
-    @completed_experiments = Lacmus::SlotMachine.get_experiments(:completed)
-    # @experiments = Dashboard.all
-    # @experiments = Lacmus::SlotMachine.get_experiments(:pending)
-    # @experiments << "test_experiment"
+    @pending_experiments = Lacmus::Experiment.all_from(:pending)
+    @completed_experiments = Lacmus::Experiment.all_from(:completed)
      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @experiments }
@@ -21,15 +21,6 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1.json
   def show
     @experiment = Lacmus::Experiment.new(params[:id])
-    # @experiment_group = Lacmus::SlotMachine.find_experiment(params[:id])
-    # @control_group = Lacmus::SlotMachine.get_control_group
-    # if @experiment.empty?
-    #   flash[:error] = "Failed to find this experiment"
-    #   redirect_to root_path and return
-    # end
-
-    # # @experiment_kpis = Lacmus::Experiment.load_experiment_kpis(params[:id])
-    # @control_group = Lacmus::SlotMachine.get_control_group
     respond_to do |format|
       format.html # show.html.erb
       # format.json { render json:  }
@@ -58,8 +49,12 @@ class ExperimentsController < ApplicationController
   end
 
   def experiment_data
+    @experiment = Lacmus::Experiment.new(params[:id])
     respond_to do |format|
-      format.html {render :partial => 'experiment_data'} # show.html.erb
+
+      format.html {
+        render :partial => 'experiment_data', :locals => {:experiment => @experiment}
+      } # show.html.erb
       # format.json { render json:  }
     end
   end

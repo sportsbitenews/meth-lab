@@ -1,7 +1,7 @@
 Pizzeria::Application.routes.draw do
 
   # match 'experiments/:experiment_id' => 'experiments#show', :as => :experiment
-  # match 'experiments/data/:experiment_id' => 'experiments#experiment_data'
+  match 'experiments/data/:id' => 'experiments#experiment_data'
   # match 'experiments/:id/get_code' => 'experiments#get_code', :as => :get_code
   
   resources :experiments do

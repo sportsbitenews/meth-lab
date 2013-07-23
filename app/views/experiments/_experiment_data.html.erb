@@ -12,19 +12,19 @@
     <th>Goals Reached</th>
     <th>Conversion</th>
     <th>Unique Exposures</th>
-	<th>Goals Reached</th>
-	<th>Conversion</th>
-	<th>Conversion Difference</th>
+  	<th>Goals Reached</th>
+  	<th>Conversion</th>
+  	<th>Conversion Difference</th>
   </tr>
 <% @experiment.experiment_kpis.keys.each do |kpi| %>
   <tr>
-    <td><%= goal.name.titleize %></td>
-    <td><%= goal.control_analytics[:exposures].to_i %></td>
-    <td><%= goal.control_kpis[:kpi]  %></td>
-    <td><%#= "%.2f" % (goal.group_a_conversion * 100.0) %>%</td>
-    <td><%= goal.experiment_analytics[:exposures].to_i %></td>
-    <td><%= goal.experiment_kpis[:kpi].to_i %></td>
-    <td><%#= "%.2f" % (goal.group_b_conversion * 100.0) %>%</td>
+    <td><%= kpi %></td>
+    <td><%= @experiment.control_analytics[:exposures].to_i %></td>
+    <td><%= @experiment.control_kpis[kpi]  %></td>
+    <td><%= "%.2f" % @experiment.control_conversion(kpi) %>%</td>
+    <td><%= @experiment.experiment_analytics[:exposures].to_i %></td>
+    <td><%= @experiment.experiment_kpis[kpi].to_i %></td>
+    <td><%= "%.2f" % @experiment.experiment_conversion(kpi) %>%</td>
     <td class="<%#=class_for_goal_row(goal.conversion_difference, goal.group_b_goals.to_i + goal.group_a_goals.to_i)%>"><%#= "%.1f" % goal.conversion_difference %>%</td>
   </tr>
 <% end %>

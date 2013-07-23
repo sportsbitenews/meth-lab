@@ -21,6 +21,7 @@
             $.ajax({
                 type     : 'get',
                 url      : target,
+                cache    : false,
                 async    : true,
                 dataType : 'html',
                 success:function(response) {

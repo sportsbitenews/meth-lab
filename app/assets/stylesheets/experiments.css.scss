@@ -67,6 +67,13 @@ code {
 	font-size: 16px;
 }
 
+.label-disabled{
+	background-color:#eee;
+	color:#999;
+	text-shadow: none;
+	font-weight:normal;
+}
+
 td.error {color:red;}
 td.success {color:darkgreen;}
 td.warning {color:orange;}
