@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+# gem 'mysql2'
 # gem 'mina'
 gem 'hiredis', '=0.4.5'
 gem 'redis', '=3.0.2', :require => "redis/connection/hiredis"
