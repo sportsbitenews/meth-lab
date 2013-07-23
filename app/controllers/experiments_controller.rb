@@ -88,7 +88,7 @@ class ExperimentsController < ApplicationController
   # POST /experiments.experiment_idson
   def create
 
-    @experiment = Lacmus::Experiment.new
+    @experiment = Lacmus::Experiment.new(params[:id])
     validate_experiment
 
     if  @experiment.errors.empty?
