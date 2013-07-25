@@ -28,8 +28,8 @@ gem "resque-async-method"
 gem 'hoptoad_notifier'
 gem 'unicorn'
 
-# gem 'lacmus', :path => '../lacmus/'
-gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.0.2'
+gem 'lacmus', :path => '../lacmus/'
+# gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.0.2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
