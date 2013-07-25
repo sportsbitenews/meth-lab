@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
 	
 	def edit
-		@active_slots_count = Lacmus::SlotMachine.experiment_slots.count
+		@active_slots_count = Lacmus::SlotMachine.experiment_slot_ids.count
 	end
 
 	def update

@@ -3,7 +3,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    @slots = Lacmus::SlotMachine.experiment_slots
+    @slots = Lacmus::SlotMachine.experiment_slot_ids
     @pending_experiments = Lacmus::Experiment.all_from(:pending)
     @completed_experiments = Lacmus::Experiment.all_from(:completed)
      respond_to do |format|
