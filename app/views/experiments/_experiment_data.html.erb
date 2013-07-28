@@ -35,12 +35,12 @@
     <td><%="%.2f" % (@experiment.experiment_conversion(kpi) - @experiment.control_conversion(kpi))%>%</td>
     <td>
       <div style="clear:none;float:left;padding-right:10px;">         
-        <%-percent_complete = @experiment.experiment_progress(kpi)-%>
-        <%="%.1f" % percent_complete%>%, 
-        <%=@experiment.remaining_participants_needed_for(kpi)%>
+        <%-#percent_complete = @experiment.experiment_progress(kpi)-%>
+        <%#="%.1f" % percent_complete%>%, 
+        <%#=@experiment.remaining_participants_needed_for(kpi)%>
       </div>
       <div class="progress progress-striped active pull-right" style="width:120px;background:#ddd;margin:0;">
-        <div class="bar" style="width: <%=percent_complete%>%;"> </div>
+        <div class="bar" style="width: <%#=percent_complete%>%;"> </div>
       </div>
     </td>
   </tr>
