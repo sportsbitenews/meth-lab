@@ -7,10 +7,11 @@ Pizzeria::Application.routes.draw do
   resources :experiments do
       member do
         get 'activate'
+        get 'reactivate'
         get 'get_code'
         get 'conclude'
+        get 'restart'
         get 'delete'
-        # post 'crete'
       end
 
       collection do

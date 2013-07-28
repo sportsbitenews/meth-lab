@@ -31,7 +31,11 @@
           <td><%= nice_datetime(experiment.end_time)%> (<%=time_ago_from_int(experiment.end_time)%>)</td>
           <td>
             <span class="pull-right">
-            <%=link_to 'activate', activate_experiment_path(experiment.id) if type == :pending%>
+              <%-if type == :pending-%>
+            <%=link_to 'activate', activate_experiment_path(experiment.id)%>
+            <%-else-%>
+            <%=link_to 'reactivate', reactivate_experiment_path(experiment.id)%>
+            <%-end-%>
             -
             <%=link_to( "destroy", delete_experiment_path(experiment.id, :list => type.to_s), :confirm => "Are you sure?")%>
             </span>

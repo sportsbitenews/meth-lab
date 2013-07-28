@@ -3,7 +3,7 @@
 	<h1><%=@experiment.name.titleize%></h1>
 	<p class="subtitle">
 		<code>(<%=@experiment.id%>)</code>
-		<span class="pull-right">Experiment Start Time: <%=nice_datetime(@experiment.start_time)%></span>
+		<span class="pull-right">Started at <%=nice_datetime(@experiment.start_time)%><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
 	</p>
 </div>
 
@@ -26,7 +26,8 @@
 
 <%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |
 <%=link_to "Destroy", delete_experiment_path(@experiment.id, :list=>'active'), :confirm => "Are you sure?"%> | 
-<%=link_to "Conclude", conclude_experiment_path(@experiment.id, :confirm => "Are you sure?")%>
+<%=link_to "Conclude", conclude_experiment_path(@experiment.id, :confirm => "Are you sure?")%> |
+<%=link_to "Reset", restart_experiment_path(@experiment.id, :confirm => "Are you sure?")%> |
 <%= link_to 'Back', experiments_path %>
 
 </div>

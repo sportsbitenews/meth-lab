@@ -31,6 +31,15 @@ class ExperimentsController < ApplicationController
     redirect_to root_path
   end
 
+  def reactivate
+    if (Lacmus::SlotMachine.reactivate_experiment(params[:id]))
+      flash[:success] = ("Experiment is now back to active state")
+    else
+      flash[:error] = ("Failed to reactivate experiment. Make sure you have available slots in your pizza.")
+    end
+    redirect_to root_path
+  end
+
   def delete
     if (Lacmus::SlotMachine.destroy_experiment(params[:list], params[:id].to_i))
       flash[:success] = ("Experiment is now active! Check your website.")
@@ -148,6 +157,11 @@ class ExperimentsController < ApplicationController
     # @experiment = Experiment.new(params[:id])
     Lacmus::SlotMachine.deactivate_experiment(params[:id])
     redirect_to root_path
+  end
+
+  def restart
+    Lacmus::SlotMachine.restart_experiment(params[:id].to_i)
+    redirect_to experiment_path(params[:id]), :notice => 'Experiment Restarted. Check Start Time to verify...'
   end
 
   # DELETE /experiments/1
