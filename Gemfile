@@ -30,7 +30,7 @@ gem 'unicorn'
 
 # rails a/b testing
 # gem 'lacmus', :path => '../lacmus/'
-gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.0.6'
+gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.0.9'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

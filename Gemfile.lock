@@ -1,5 +1,7 @@
-PATH
-  remote: ../lacmus/
+GIT
+  remote: git@github.com:fiverr/lacmus.git
+  revision: 1e0c721b01bd1bb2d9f666e569ac04214e33d7fc
+  tag: v0.0.9
   specs:
     lacmus (0.0.4)
 
