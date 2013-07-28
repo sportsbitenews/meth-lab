@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
 	end
 
 	def update
-		Lacmus::SlotMachine.resize_slot_array(params[:slot_count].to_i)
+		Lacmus::SlotMachine.resize_and_reset_slot_array(params[:slot_count].to_i)
 		redirect_to root_path
 	end
 end

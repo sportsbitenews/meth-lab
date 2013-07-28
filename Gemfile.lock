@@ -1,7 +1,7 @@
 PATH
   remote: ../lacmus/
   specs:
-    lacmus (0.0.1)
+    lacmus (0.0.4)
 
 GEM
   remote: https://rubygems.org/
