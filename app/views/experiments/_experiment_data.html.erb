@@ -2,8 +2,8 @@
 <table class="table table-striped table-bordered table-hover">
   <tr>
   	<th></th>
-  	<th colspan="3">Control Group (A)</th>
-  	<th colspan="3">Test Group (B)</th>
+  	<th colspan="3">Control Group, <%=@experiment.control_analytics[:exposures].to_i%> Views</th>
+  	<th colspan="3">Experiment Group, <%=@experiment.experiment_analytics[:exposures].to_i%> Views</th>
   	<th>Results</th>
   </tr>
   <tr>
