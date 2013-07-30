@@ -1,6 +1,6 @@
 <div class="experiment-show">
 <div class="row header">
-	<h1><%=@experiment.name.titleize%></h1>
+	<h1><%=@experiment.name.titleize if @experiment.name%></h1>
 	<p class="subtitle">
 		<code>(<%=@experiment.id%>)</code>
 		<span class="pull-right">Started at <%=nice_datetime(@experiment.start_time)%><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 

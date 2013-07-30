@@ -1,26 +1,22 @@
 <div class="inner">
-
-  <%=simple_experiment(35, "control", "experiment")%>
-  <%-cookies.delete('lc_tuid')-%>
-  <%-mark_kpi!('fts')%>
 <table class="table table-striped table-bordered table-hover">
   <tr>
   	<th></th>
-  	<th colspan="2">Control Group, <%=@experiment.control_analytics[:exposures].to_i%> Views</th>
-  	<th colspan="2">Experiment Group, <%=@experiment.experiment_analytics[:exposures].to_i%> Views</th>
-  	<th>Results</th>
-    <th></th>
+  	<th colspan="2">Control Group<br/><%=@experiment.control_analytics[:exposures].to_i%> Views</th>
+  	<th colspan="2">Experiment Group<br/><%=@experiment.experiment_analytics[:exposures].to_i%> Views</th>
+  	<th width="80px;" colspan="2">Results</th>
+    <!-- <th colspan="2"></th> -->
   </tr>
   <tr>
     <th>Goal Name</th>
     <!-- <th>Unique Exposures</th> -->
-    <th>Goals Reached</th>
+    <th>Goals</th>
     <th>Conversion</th>
     <!-- <th>Unique Exposures</th> -->
-  	<th>Goals Reached</th>
+  	<th>Goals</th>
   	<th>Conversion</th>
-  	<th>Conversion Difference</th>
-    <th>Remining Participants Needed</th>
+  	<th>Conversion Change</th>
+    <th>Progress</th>
   </tr>
 <% @experiment.experiment_kpis.keys.each do |kpi| %>
   <tr>
@@ -32,14 +28,14 @@
     <td><%= @experiment.experiment_kpis[kpi].to_i %></td>
     <td><%= "%.2f" % @experiment.experiment_conversion(kpi) %>%
     </td>
-    <td><%="%.2f" % (@experiment.experiment_conversion(kpi) - @experiment.control_conversion(kpi))%>%</td>
-    <td>
-      <div style="clear:none;float:left;padding-right:10px;">         
+    <td class="<%=class_for_goal_row(@experiment.experiment_kpis[kpi].to_i, @experiment.experiment_conversion(kpi))%>"><%="%.2f" % (@experiment.experiment_conversion(kpi) - @experiment.control_conversion(kpi))%>%</td>
+    <td style="padding-top:2px;">
+      <div style="font-size:10px;padding:0;">
         <%-percent_complete = @experiment.experiment_progress(kpi)-%>
         <%="%.1f" % percent_complete%>%, 
         <%=@experiment.remaining_participants_needed_for(kpi)%>
       </div>
-      <div class="progress progress-striped active pull-right" style="width:120px;background:#ddd;margin:0;">
+      <div class="progress progress-striped active" style="height:6px;background:#ddd;padding:0;margin:0;">
         <div class="bar" style="width: <%=percent_complete%>%;"> </div>
       </div>
     </td>
