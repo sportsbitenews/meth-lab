@@ -1,7 +1,9 @@
-PATH
-  remote: ../lacmus/
+GIT
+  remote: git@github.com:fiverr/lacmus.git
+  revision: 128802e10707612758dd4f999add0ecb1588446e
+  tag: v0.0.13
   specs:
-    lacmus (0.0.12)
+    lacmus (0.0.13)
 
 GEM
   remote: https://rubygems.org/
