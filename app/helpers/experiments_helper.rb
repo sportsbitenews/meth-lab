@@ -6,6 +6,7 @@ module ExperimentsHelper
 	
 
 	def class_for_goal_row(performance_percent)
+			return if performance_percent.nil?
 			return 'disabled' if performance_percent > -3 && performance_percent < 3
 			return 'success' if performance_percent > 3
 			return 'warning' if performance_percent <= -3 && performance_percent > -6
