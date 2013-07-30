@@ -56,8 +56,13 @@ class ExperimentsController < ApplicationController
     @experiment = Lacmus::Experiment.new(params[:id])
     respond_to do |format|
 
+      puts params
       format.html {
-        render :partial => 'experiment_data', :locals => {:experiment => @experiment}
+        if params[:type].to_s == 'header'
+          render :partial => 'experiment_header', :locals => {:experiment => @experiment} and return
+        else
+          render :partial => 'experiment_data', :locals => {:experiment => @experiment}
+        end
       } # show.html.erb
       # format.json { render json:  }
     end

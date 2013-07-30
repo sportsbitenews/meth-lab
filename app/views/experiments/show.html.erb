@@ -8,17 +8,9 @@
 </div>
 
 <div class="row">
-	<div class="hero-unit span5">
-		<h1>A</h1>
-		<strong>Contorl Group</strong><br/>
-		Control Group, Showing Original Version
-	</div>
-
-	<div class="hero-unit span6">
-		<h1>B</h1>
-		<strong>Test Group</strong><br/>
-		<%=@experiment.description %>
-	</div>
+		<div data-ajax="false" data-target="/experiments/data/<%=@experiment.id%>?type=header" data-interval="3">
+			<%=render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
+		</div>
 </div>
 <div data-ajax="true" data-target="/experiments/data/<%=@experiment.id%>" data-interval="3">
 	<%=render :partial => 'experiment_data', :locals => {:experiment => @experiment}%>

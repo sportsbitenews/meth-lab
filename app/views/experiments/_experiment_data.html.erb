@@ -15,20 +15,22 @@
     <!-- <th>Unique Exposures</th> -->
   	<th>Goals</th>
   	<th>Conversion</th>
-  	<th>Conversion Change</th>
-    <th>Progress</th>
+  	<th width="80px;">Performance</th>
+    <th>User Participation</th>
   </tr>
 <% @experiment.experiment_kpis.keys.each do |kpi| %>
   <tr>
     <td><%= kpi %></td>
     <!-- <td><%#= @experiment.control_analytics[:exposures].to_i %></td> -->
-    <td><%= @experiment.control_kpis[kpi]  %></td>
+    <td><%= @experiment.control_kpis[kpi].to_i  %></td>
     <td><%= "%.2f" % @experiment.control_conversion(kpi) %>%</td>
     <!-- <td><%#= @experiment.experiment_analytics[:exposures].to_i %></td> -->
     <td><%= @experiment.experiment_kpis[kpi].to_i %></td>
     <td><%= "%.2f" % @experiment.experiment_conversion(kpi) %>%
     </td>
-    <td class="<%=class_for_goal_row(@experiment.experiment_kpis[kpi].to_i, @experiment.experiment_conversion(kpi))%>"><%="%.2f" % (((@experiment.experiment_conversion(kpi) / @experiment.control_conversion(kpi)) - 1) *100)%>%</td>
+    <td class="<%=class_for_goal_row(@experiment.performance_perc(kpi))%>">
+      <%="%.2f" % @experiment.performance_perc(kpi)%>%
+    </td>
     <td style="padding-top:2px;">
       <div style="font-size:10px;padding:0;">
         <%-percent_complete = @experiment.experiment_progress(kpi)-%>

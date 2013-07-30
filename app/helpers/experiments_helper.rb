@@ -5,10 +5,10 @@ module ExperimentsHelper
 	end
 	
 
-	def class_for_goal_row(conversion, goal_count)
-		return 'disabled' if goal_count < 600
-		return 'success' if conversion > 3
-		return 'warning' if (conversion < -3) && (conversion > -10)
-		return 'error' if conversion < -10
+	def class_for_goal_row(performance_percent)
+			return 'disabled' if performance_percent > -3 && performance_percent < 3
+			return 'success' if performance_percent > 3
+			return 'warning' if performance_percent <= -3 && performance_percent > -6
+			return 'error' if performance_percent <= -6
 	end
 end
