@@ -29,7 +29,7 @@ gem 'hoptoad_notifier'
 gem 'unicorn'
 
 # rails a/b testing
-gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.0.13'
+gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.1.2'
 #gem 'lacmus', :path => '../lacmus/'
 
 # To use ActiveModel has_secure_password
