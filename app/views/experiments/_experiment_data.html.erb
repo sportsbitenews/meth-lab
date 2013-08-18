@@ -23,13 +23,13 @@
     <td><%= kpi %></td>
     <!-- <td><%#= @experiment.control_analytics[:exposures].to_i %></td> -->
     <td><%= @experiment.control_kpis[kpi].to_i  %></td>
-    <td><%= "%.2f" % @experiment.control_conversion(kpi) %>%</td>
+    <td><%= "%.4f" % @experiment.control_conversion(kpi) %>%</td>
     <!-- <td><%#= @experiment.experiment_analytics[:exposures].to_i %></td> -->
     <td><%= @experiment.experiment_kpis[kpi].to_i %></td>
-    <td><%= "%.2f" % @experiment.experiment_conversion(kpi) %>%
+    <td><%= "%.4f" % @experiment.experiment_conversion(kpi) %>%
     </td>
-    <td class="<%#=class_for_goal_row(@experiment.performance_perc(kpi))%>">
-      <%#="%.2f" % @experiment.performance_perc(kpi)%>%
+    <td class="<%=class_for_goal_row(@experiment.performance_perc(kpi))%>">
+      <%="%.4f" % @experiment.performance_perc(kpi)%>%
     </td>
     <td style="padding-top:2px;">
       <div style="font-size:10px;padding:0;">
