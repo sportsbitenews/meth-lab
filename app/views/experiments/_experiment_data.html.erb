@@ -29,7 +29,7 @@
     <td><%= "%.4f" % @experiment.experiment_conversion(kpi) %>%
     </td>
     <td class="<%=class_for_goal_row(@experiment.performance_perc(kpi))%>">
-      <%="%.4f" % @experiment.performance_perc(kpi) unless @experiment.performance_perc(kpi).to_i.zero? %>%
+	<%="%.4f" % (100-((@experiment.control_conversion(kpi) / @experiment.experiment_conversion(kpi))*100)) %>%
     </td>
     <td style="padding-top:2px;">
       <div style="font-size:10px;padding:0;">
