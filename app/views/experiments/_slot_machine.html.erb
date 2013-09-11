@@ -28,7 +28,7 @@
       <td>----</td>
     </tr>
   <%-else-%>
-      <%- experiment = Lacmus::Experiment.new(slot.to_i)-%>
+      <%- experiment = Lacmus::Experiment.find(slot.to_i)-%>
       <%#- experiment = {:experiment_id => slot.to_i, :name => '-- ERROR --'} if experiment == {}-%>
     <tr>
       <td><%=index%></td>

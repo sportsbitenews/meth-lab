@@ -1,9 +1,9 @@
 GIT
   remote: git@github.com:fiverr/lacmus.git
-  revision: 27a3cc2a9a1195700d41c248e14271377db88643
-  tag: v0.1.6
+  revision: dd8347118299c1d77b69fa46f97252db8df38287
+  tag: v0.2.1
   specs:
-    lacmus (0.0.14)
+    lacmus (0.2.1)
 
 GEM
   remote: https://rubygems.org/

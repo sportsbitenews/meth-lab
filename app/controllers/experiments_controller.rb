@@ -4,8 +4,8 @@ class ExperimentsController < ApplicationController
   # GET /experiments.json
   def index
     @slots = Lacmus::SlotMachine.experiment_slot_ids
-    @pending_experiments = Lacmus::Experiment.all_from(:pending)
-    @completed_experiments = Lacmus::Experiment.all_from(:completed)
+    @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
+    @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)
      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @experiments }
@@ -15,7 +15,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-    @experiment = Lacmus::Experiment.new(params[:id])
+    @experiment = Lacmus::Experiment.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       # format.json { render json:  }
@@ -23,7 +23,8 @@ class ExperimentsController < ApplicationController
   end
 
   def activate
-    if (Lacmus::SlotMachine.activate_experiment(params[:id]))
+  	@experiment = Lacmus::Experiment.find(params[:id])
+    if @experiment.activate!
       flash[:success] = ("Experiment is now active! Check your website.")
     else
       flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
@@ -32,7 +33,8 @@ class ExperimentsController < ApplicationController
   end
 
   def reactivate
-    if (Lacmus::SlotMachine.reactivate_experiment(params[:id]))
+  	@experiment = Lacmus::Experiment.find(params[:id])
+    if @experiment.activate!
       flash[:success] = ("Experiment is now back to active state")
     else
       flash[:error] = ("Failed to reactivate experiment. Make sure you have available slots in your pizza.")
@@ -41,7 +43,7 @@ class ExperimentsController < ApplicationController
   end
 
   def delete
-    if (Lacmus::SlotMachine.destroy_experiment(params[:list], params[:id].to_i))
+    if (Lacmus::Experiment.destroy(params[:id]))
       flash[:success] = ("Experiment is now active! Check your website.")
     else
       flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
@@ -53,7 +55,7 @@ class ExperimentsController < ApplicationController
   end
 
   def experiment_data
-    @experiment = Lacmus::Experiment.new(params[:id])
+    @experiment = Lacmus::Experiment.find(params[:id])
     respond_to do |format|
 
       puts params
@@ -71,7 +73,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/new
   # GET /experiments/new.json
   def new
-    @experiment = Lacmus::Experiment.new(nil)
+    @experiment = Lacmus::Experiment.new({})
 
     respond_to do |format|
       format.html # new.html.erb
@@ -81,7 +83,7 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
-    @experiment = Lacmus::Experiment.new(params[:id])
+    @experiment = Lacmus::Experiment.find(params[:id])
   end
 
   def validate_experiment
@@ -101,19 +103,18 @@ class ExperimentsController < ApplicationController
   # POST /experiments
   # POST /experiments.experiment_idson
   def create
-
-    @experiment = Lacmus::Experiment.new(params[:id])
+    @experiment = Lacmus::Experiment.new({})
     validate_experiment
 
-    if  @experiment.errors.empty?
-      experiment_id = Lacmus::SlotMachine.create_experiment(params[:name], params[:description])
-      @experiment.errors << "failed to create experiment" unless experiment_id
+    if @experiment.errors.empty?
+    	@experiment = Lacmus::Experiment.create!(name: params[:name], description: params[:description], screenshot_url: params[:screenshot_url])
+      @experiment.errors << "failed to create experiment" unless @experiment
     end
 
     respond_to do |format|
       if @experiment.errors.empty?
         format.html { 
-            redirect_to get_code_experiment_path(experiment_id), :flash => { :success => 'Slice Created Successfully!' } 
+            redirect_to get_code_experiment_path(@experiment.id), :flash => { :success => 'Slice Created Successfully!' } 
         }
         format.json { render json: @experiment, status: :created, location: @experiment }
       else
@@ -126,11 +127,10 @@ class ExperimentsController < ApplicationController
   # PUT /experiments/1
   # PUT /experiments/1.json
   def update
-    @experiment = Lacmus::Experiment.new(params[:id])
+    @experiment = Lacmus::Experiment.find(params[:id])
     validate_experiment
 
     if @experiment.errors.empty?
-      # success = Lacmus::SlotMachine.update_experiment(params[:name], params[:description], params[:screenshot_url])
       @experiment.name = params[:name]
       @experiment.description = params[:description]
       @experiment.screenshot_url = params[:screenshot_url]
@@ -159,25 +159,28 @@ class ExperimentsController < ApplicationController
   end
 
   def conclude
-    # @experiment = Experiment.new(params[:id])
-    Lacmus::SlotMachine.deactivate_experiment(params[:id])
+    @experiment = Lacmus::Experiment.find(params[:id])
+    @experiment.deactivate!
+
     redirect_to root_path
   end
 
   def restart
-    Lacmus::SlotMachine.restart_experiment(params[:id].to_i)
+    @experiment = Lacmus::Experiment.find(params[:id])
+    @experiment.restart!
+
     redirect_to experiment_path(params[:id]), :notice => 'Experiment Restarted. Check Start Time to verify...'
   end
 
   # DELETE /experiments/1
   # DELETE /experiments/1.json
-  def destroy
-    @dashboard = Dashboard.find(params[:id])
-    @dashboard.destroy
+  # def destroy
+  #   @dashboard = Dashboard.find(params[:id])
+  #   @dashboard.destroy
 
-    respond_to do |format|
-      format.html { redirect_to experiments_url }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to experiments_url }
+  #     format.json { head :no_content }
+  #   end
+  # end
 end
