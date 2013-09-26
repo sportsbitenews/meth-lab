@@ -1,4 +1,4 @@
-Pizzeria::Application.routes.draw do
+MethLab::Application.routes.draw do
 
   # match 'experiments/:experiment_id' => 'experiments#show', :as => :experiment
   match 'experiments/data/:id' => 'experiments#experiment_data'

@@ -9,7 +9,7 @@ gem 'rails', '3.2.11'
 # gem 'mina'
 gem 'hiredis', '=0.4.5'
 gem 'redis', '=3.0.2', :require => "redis/connection/hiredis"
-
+gem 'abanalyzer'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,7 +29,7 @@ gem 'hoptoad_notifier'
 gem 'unicorn'
 
 # rails a/b testing
-gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.2.1'
+gem 'lacmus', :git => 'git@github.com:fiverr/lacmus.git', :tag => 'v0.2.3'
 #gem 'lacmus', :path => '../lacmus/'
 
 # To use ActiveModel has_secure_password

@@ -14,7 +14,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Pizzeria
+module MethLab
   class Application < Rails::Application
 
     # $redis = Redis.new(REDIS_CONFIG)

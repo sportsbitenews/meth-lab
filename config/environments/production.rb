@@ -1,4 +1,4 @@
-Pizzeria::Application.configure do
+MethLab::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -9,7 +9,7 @@ Pizzeria::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  # Moshe: setting this temproraly as true because we don't run pizzeria with
+  # Moshe: setting this temproraly as true because we don't run methlab with
   # ngnix on produxction. Set as false once we do.
   config.serve_static_assets = true
 

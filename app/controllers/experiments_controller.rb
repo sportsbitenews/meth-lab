@@ -27,7 +27,7 @@ class ExperimentsController < ApplicationController
     if @experiment.activate!
       flash[:success] = ("Experiment is now active! Check your website.")
     else
-      flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
+      flash[:error] = ("Failed to activate experiment. Make sure you have available slots.")
     end
     redirect_to root_path
   end
@@ -37,7 +37,7 @@ class ExperimentsController < ApplicationController
     if @experiment.activate!
       flash[:success] = ("Experiment is now back to active state")
     else
-      flash[:error] = ("Failed to reactivate experiment. Make sure you have available slots in your pizza.")
+      flash[:error] = ("Failed to reactivate experiment. Make sure you have available slots.")
     end
     redirect_to root_path
   end
@@ -46,7 +46,7 @@ class ExperimentsController < ApplicationController
     if (Lacmus::Experiment.destroy(params[:id]))
       flash[:success] = ("Experiment is now active! Check your website.")
     else
-      flash[:error] = ("Failed to activate experiment. Make sure you have available slots in your pizza.")
+      flash[:error] = ("Failed to activate experiment. Make sure you have available slots.")
     end
     redirect_to root_path
   end

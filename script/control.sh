@@ -4,9 +4,9 @@
 PID_FILE=./unicorn.pid
 
 if [ "$2" = "development" ]; then
-   UNICORN_CFG="config/pizzeria_dev_unicorn.rb"
+   UNICORN_CFG="config/meth_lab_dev_unicorn.rb"
 else
-   UNICORN_CFG="config/pizzeria_unicorn.rb"
+   UNICORN_CFG="config/meth_lab_unicorn.rb"
 fi
 
 echo "Working with unicorn script: $UNICORN_CFG."

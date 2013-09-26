@@ -1,4 +1,4 @@
-pizzeria
+MethLab
 ========
 
-A management app for fiverr's Pizza a/b testing framework
+A management app for fiverr's Lacmus a/b testing framework

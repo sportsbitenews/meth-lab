@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pizzeria::Application.load_tasks
+MethLab::Application.load_tasks
