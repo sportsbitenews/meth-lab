@@ -1,7 +1,7 @@
 <div class="row">
     <div class="span8">
-        <h1>Great! Time to grab your slice</h1>
-        <h2><small>Option One: Two Ruby blocks</small></h2>
+        <h1>Great! Now, grab the code</h1>
+        <h2><small>Option One: Two Ruby blocks, one for each variation</small></h2>
     </div>
     <div class="span2 pull-right">
           <%= link_to "Finish", root_path ,:class=>'btn btn-success btn-large' %>
@@ -25,12 +25,12 @@
 
   <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='comment'># your code for the control group who get the 
   # default version of your site here.</span>
-  <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Order Pizza Now!", "Get Your Pizzas Here..."</span><span class="function">)</span> <span class='block-do'>do</span>
+  <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Order Pizza Now!", "Get Your Pizzas Here..."</span><span class="function">)</span> <span class='block-do'></span>
 </code></pre>
 
     <div class="large-space-from-top"></div>
       <h2>Caching the experiment area? Add this to your cache key</h2>
-  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='class-var'>@my_key = </span><span class="string">"my_existing_key-#{<span class="function">pizza_cache_key</span>}"</span>
+  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='class-var'>@my_key = </span><span class="string">"my_existing_key-#{<span class="function">lacmus_cache_key</span>}"</span>
 </code></pre>
 
     </div>

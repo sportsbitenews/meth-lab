@@ -14,3 +14,4 @@
 //= require bootstrap.min
 //= require experiments
 //= require updater
+//= require jquery_ujs

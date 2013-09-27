@@ -3,6 +3,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
+    # simple_experiment(2, "default title", "experiment title")
     @slots = Lacmus::SlotMachine.experiment_slot_ids
     @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
     @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)

@@ -17,8 +17,18 @@
   	<th>Conversion</th>
   	<th width="80px;">Performance</th>
     <th>User Participation</th>
+    <th>Trend</th>
   </tr>
 <% @experiment.experiment_kpis.keys.each do |kpi| %>
+
+<script type="text/javascript">
+<%-timeline_values = -%>
+$(function() {    
+    $('.trendline-<%=kpi%>').sparkline('html', { fillColor: false, changeRangeMin: 0, chartRangeMax: 10, width: 100, lineColor: 'blue' });
+    $('.trendline-<%=kpi%>').sparkline([<%=@experiment.kpi_timeline_data(@experiment.experiment_id, kpi, true)%>], { composite: true, fillColor: false, lineColor: 'red', changeRangeMin: 0, chartRangeMax: 10 });
+   });
+</script>
+
   <tr>
     <td><%= kpi %></td>
     <!-- <td><%#= @experiment.control_analytics[:exposures].to_i %></td> -->
@@ -42,6 +52,9 @@
         <div class="bar" style="width: <%=percent_complete%>%;"> </div>
       </div>
     </td>
+   <td>
+      <div class="trendline-<%=kpi%>"><%=@experiment.kpi_timeline_data(@experiment.experiment_id, kpi, true)%></div>
+   </td>
   </tr>
 <% end %>
 </table>
