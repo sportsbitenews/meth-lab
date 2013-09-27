@@ -9,12 +9,12 @@
 
 <%#=simple_experiment(2, "Order Pizza Now!", "Get Your Pizzas Here...") %>
 <div class="row">
-		<div data-ajax="false" data-target="/experiments/data/<%=@experiment.id%>?type=header" data-interval="3">
+		<div data-ajax="false" data-target="/experiments/stats/<%=@experiment.id%>?type=header" data-interval="3">
 			<%=render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
 		</div>
 </div>
-<div data-ajax="true" data-target="/experiments/data/<%=@experiment.id%>" data-interval="3">
-	<%=render :partial => 'experiment_data', :locals => {:experiment => @experiment}%>
+<div data-ajax="true" data-target="/experiments/stats/<%=@experiment.id%>" data-interval="3">
+	<%=render :partial => 'experiment_stats', :locals => {:experiment => @experiment}%>
 </div>
 
 <%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |

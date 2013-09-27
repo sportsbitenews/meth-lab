@@ -55,18 +55,16 @@ class ExperimentsController < ApplicationController
   def get_code
   end
 
-  def experiment_data
+  def experiment_stats
     @experiment = Lacmus::Experiment.find(params[:id])
     respond_to do |format|
-
-      puts params
-      format.html {
+      format.html do
         if params[:type].to_s == 'header'
           render :partial => 'experiment_header', :locals => {:experiment => @experiment} and return
         else
-          render :partial => 'experiment_data', :locals => {:experiment => @experiment}
+          render :partial => 'experiment_stats', :locals => {:experiment => @experiment}
         end
-      } # show.html.erb
+      end
       # format.json { render json:  }
     end
   end

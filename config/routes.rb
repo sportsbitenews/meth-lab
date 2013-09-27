@@ -1,7 +1,7 @@
 MethLab::Application.routes.draw do
 
   # match 'experiments/:experiment_id' => 'experiments#show', :as => :experiment
-  match 'experiments/data/:id' => 'experiments#experiment_data'
+  match 'experiments/stats/:id' => 'experiments#experiment_stats'
   # match 'experiments/:id/get_code' => 'experiments#get_code', :as => :get_code
   
   resources :experiments do
