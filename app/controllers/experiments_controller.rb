@@ -70,12 +70,16 @@ class ExperimentsController < ApplicationController
   end
 
   def timeline_data
+  	if Rails.env.development?
+  		render json: mock_timeline_data and return
+  	end
+
   	@experiment = Lacmus::Experiment.find(params[:id])
   	kpi 				= params[:kpi]
 
   	if @experiment.nil? || kpi.nil?
   		render json: {control: [], experiment: []} and return
-  	end	
+  	end
 
   	data = {
   		control: 		@experiment.conversion_timeline_data(kpi, false),
@@ -197,4 +201,19 @@ class ExperimentsController < ApplicationController
   #     format.json { head :no_content }
   #   end
   # end
+
+  private
+
+  def mock_timeline_data(amount = 200)
+  	control_stub 		= []
+  	experiment_stub = []
+
+  	amount.times do |i|
+  		control_stub << rand().round(5)
+  		experiment_stub << rand().round(5)
+  	end
+
+  	{control: control_stub, experiment: experiment_stub}
+  end
+
 end
