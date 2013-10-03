@@ -74,7 +74,7 @@ class ExperimentsController < ApplicationController
   	kpi 				= params[:kpi]
 
   	if @experiment.nil? || kpi.nil?
-  		return {control: [], experiment: []}
+  		render json: {control: [], experiment: []} and return
   	end	
 
   	data = {
