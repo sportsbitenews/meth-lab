@@ -12,6 +12,7 @@ MethLab::Application.routes.draw do
         get 'conclude'
         get 'restart'
         get 'delete'
+        get 'timeline_data'
       end
 
       collection do

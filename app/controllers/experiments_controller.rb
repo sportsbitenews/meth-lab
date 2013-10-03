@@ -7,7 +7,7 @@ class ExperimentsController < ApplicationController
     @slots = Lacmus::SlotMachine.experiment_slot_ids
     @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
     @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)
-     respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @experiments }
     end
@@ -67,6 +67,21 @@ class ExperimentsController < ApplicationController
       end
       # format.json { render json:  }
     end
+  end
+
+  def timeline_data
+  	@experiment = Lacmus::Experiment.find(params[:id])
+  	kpi 				= params[:kpi]
+
+  	if @experiment.nil? || kpi.nil?
+  		return {control: [], experiment: []}
+  	end	
+
+  	data = {
+  		control: 		@experiment.conversion_timeline_data(kpi, false),
+			experiment: @experiment.conversion_timeline_data(kpi, true)
+  	}
+  	render json: data
   end
 
   # GET /experiments/new
