@@ -12,12 +12,17 @@
         box-sizing: border-box;
     }
 
+    .graph-toggle {
+        padding-bottom: 10px;
+    }
+
     .table-experiment-data {
 
         .js-data-graph {
             display: none;
 
             td {
+                background-color: #fff !important;
                 padding: 8px 0;
             }
         }

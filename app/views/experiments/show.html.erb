@@ -15,7 +15,7 @@
 		<%= render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
     </div>
 
-    <div class="row" data-ajax="true" data-target="/experiments/stats/<%= @experiment.id %>" data-interval="3">
+    <div class="row" data-ajax="true" data-target="/experiments/stats/<%= @experiment.id %>" data-interval="13">
         <%= render :partial => 'experiment_stats', :locals => {:experiment => @experiment}%>
     </div>
 

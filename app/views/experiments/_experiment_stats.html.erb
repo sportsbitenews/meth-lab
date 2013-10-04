@@ -8,6 +8,11 @@
         </script>
 
         <div class="span12">
+
+            <nav class="graph-toggle js-graph-toggle">
+                <a href="#" class="js-graphs-show">Show All Graphs</a> | <a href="#" class="js-graphs-hide">Hide All Graphs</a>
+            </nav>
+
             <table class="table table-striped table-bordered table-experiment-data js-experiment-data">
                 <thead>
                     <tr>
@@ -54,22 +59,21 @@
 
                     <script type="text/javascript">
 
-                        // hack to get a json object
-                        var timelineDataObj = timelineData.<%= kpi %>,
-                            arrConVal       = [], // control values
-                            arrExpVals      = []; // experiment values
+                        var timelineDataObj_<%= kpi %> = timelineData.<%= kpi %>,
+                            arrConVal_<%= kpi %>       = [], // control values
+                            arrExpVals_<%= kpi %>      = []; // experiment values
 
                         // get control values
-                        $.each(timelineDataObj.control, function(k, val) {
-                            arrConVal.push(val);
+                        $.each(timelineDataObj_<%= kpi %>.control, function(k, val) {
+                            arrConVal_<%= kpi %>.push(val);
                         });
 
                         // get experiment values 
-                        $.each(timelineDataObj.experiment, function(k, val) {
-                            arrExpVals.push(val);
+                        $.each(timelineDataObj_<%= kpi %>.experiment, function(k, val) {
+                            arrExpVals_<%= kpi %>.push(val);
                         });
 
-                        experimentData.showGraph('<%= kpi %>',arrConVal,arrExpVals);
+                        experimentData.showGraph('<%= kpi %>',arrConVal_<%= kpi %>,arrExpVals_<%= kpi %>);
                         
                     </script>
 

@@ -23,6 +23,17 @@
                 $(this).toggleClass('graph-active');
             });
 
+            // bind show/hide all graphs
+            $(document.body).on('click', '.graph-toggle .js-graphs-show', function(e) {
+                e.preventDefault();
+                $('.js-experiment-data .js-data-main').addClass('graph-active');
+            });
+
+            $(document.body).on('click', '.graph-toggle .js-graphs-hide', function(e) {
+                e.preventDefault();
+                $('.js-experiment-data .js-data-main').removeClass('graph-active');
+            });
+
         },
 
         updateData: function(ele,target) {
@@ -30,6 +41,12 @@
             var arrGraphRows = [];
 
             if ($(ele).find('.js-experiment-data').length > 0) {
+
+                // add min-height to element so it doesn't jump
+                var wrapHeight = $(ele).innerHeight();
+                $(ele).css('min-height',wrapHeight + 'px');
+
+                // figure out which graph rows are open
                 $(ele).find('.js-experiment-data .js-data-main').each(function(i) {
                     if ($(this).hasClass('graph-active')) {
                         arrGraphRows.push($(this).attr('data-kpi'));
@@ -53,6 +70,9 @@
                             $(ele).find('.js-experiment-data .js-data-main[data-kpi="' + val + '"]').addClass('graph-active');
                         });
                     }
+
+                    // remove min-height
+                    $(ele).css('min-height','0px');
                 }
             });
         },
