@@ -91,7 +91,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: kpi
+                        text: null
                     },
                     endOnTick: true,
                     maxPadding: 0
