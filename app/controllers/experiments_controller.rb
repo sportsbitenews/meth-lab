@@ -187,6 +187,10 @@ class ExperimentsController < ApplicationController
   #   end
   # end
 
+  def timeline_data
+  	render json: {:k2 => 'v'}
+  end
+
   private
 
   def prepare_timeline_data(experiment)
@@ -195,7 +199,7 @@ class ExperimentsController < ApplicationController
   	kpis.each do |kpi|
   		data[kpi] = timeline_data_by_kpi(@experiment, kpi)
   	end
-  	data
+  	data.to_json
   end
 
   def timeline_data_by_kpi(experiment, kpi)
@@ -203,7 +207,7 @@ class ExperimentsController < ApplicationController
   		return mock_timeline_data
   	end
 
-  	data = {
+  	{
   		control: 		experiment.conversion_timeline_data(kpi, false),
 			experiment: experiment.conversion_timeline_data(kpi, true)
   	}
