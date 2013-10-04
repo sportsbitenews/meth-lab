@@ -2139,6 +2139,13 @@ table {
   -moz-border-radius-topright: 4px;
 }
 
+.table-striped thead {
+    td {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+}
+
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
   background-color: #f9f9f9;
