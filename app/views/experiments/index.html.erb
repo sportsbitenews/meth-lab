@@ -1,14 +1,6 @@
 
 <h1>Active Experiment Slices</h1>
 <h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
-<%#-binding.pry-%>
-<%render_control_version(1) do%>
-	<%="control version"%>
-<%end%>
-
-<%render_experiment_version(1) do%>
-	<%="exp version"%>
-<%end%>
 
 <%=render :partial => 'slot_machine', :locals => {:slots => @slots}%>
 
@@ -17,9 +9,7 @@
     <h2>Pending Experiment Slices</h2>
   </div>
   <div class="span2 pull-right">
-    <td>
       <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Slice</a>
-    </td>
   </div>
 </div>
 
