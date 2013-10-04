@@ -1,12 +1,20 @@
-<%binding.pry%>
+        <script type="text/javascript">
+
+            // hack to get a json object
+            var timelineDataRaw = '<%= @timeline_data %>',
+                timelineData    = timelineDataRaw.replace(/&quot;/g, '"'),
+                timelineData    = JSON.parse(timelineData);
+            
+        </script>
+
         <div class="span12">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-experiment-data js-experiment-data">
                 <thead>
                     <tr>
                         <td></td>
                         <td colspan="2">Control Group<br/><%=@experiment.control_analytics[:exposures].to_i%> Views</td>
                         <td colspan="2">Experiment Group<br/><%=@experiment.experiment_analytics[:exposures].to_i%> Views</td>
-                        <td colspan="3">Results</td>
+                        <td colspan="2">Results</td>
                     </tr>
                     <tr>
                         <td>Goal Name</td>
@@ -16,23 +24,12 @@
                         <td>Conversion</td>
                         <td width="80px;">Performance</td>
                         <td>User Participation</td>
-                        <td>Trend</td>
                     </tr>
                 </thead>
                 <tbody>
                     <% @experiment.experiment_kpis.keys.each do |kpi| %>
 
-                        <script type="text/javascript">
-
-                            // sparkline
-
-                            // high charts
-                            var timelineData = JSON.stringify(<%= @timeline_data %>);
-                            console.log(timelineData);
-                            
-                        </script>
-
-                    <tr>
+                    <tr class="js-data-main" data-kpi="<%= kpi %>">
                         <td><%= kpi %></td>
                         <td><%= @experiment.control_kpis[kpi].to_i  %></td>
                         <td><%= "%.4f" % @experiment.control_conversion(kpi) %>%</td>
@@ -50,13 +47,31 @@
                                 <div class="bar" style="width: <%= percent_complete %>%;"> </div>
                             </div>
                         </td>
-                        <td>
-                            <div class="js-trendline-<%= kpi %>"><%= @experiment.kpi_timeline_data(@experiment.kpi_timeline_data(kpi, true)) %></div>
-                        </td>
                     </tr>
-                    <tr>
-                        <td colspan="8" class="2js-highchart-<%= kpi %>">Stats go here</td>
+                    <tr class="js-data-graph js-data-graph-<%= kpi %>">
+                        <td colspan="7" class="js-highchart-<%= kpi %>">Stats go here</td>
                     </tr>
+
+                    <script type="text/javascript">
+
+                        // hack to get a json object
+                        var timelineDataObj = timelineData.<%= kpi %>,
+                            arrConVal       = [], // control values
+                            arrExpVals      = []; // experiment values
+
+                        // get control values
+                        $.each(timelineDataObj.control, function(k, val) {
+                            arrConVal.push(val);
+                        });
+
+                        // get experiment values 
+                        $.each(timelineDataObj.experiment, function(k, val) {
+                            arrExpVals.push(val);
+                        });
+
+                        experimentData.showGraph('<%= kpi %>',arrConVal,arrExpVals);
+                        
+                    </script>
 
                     <% end %>
                 </tbody>
