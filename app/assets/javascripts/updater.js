@@ -77,7 +77,20 @@
             });
         },
 
-        showGraph: function(kpi,arrConVal,arrExpVals) {
+        showGraph: function(kpi,timelineDataObj) {
+
+            var arrConVal  = [],
+                arrExpVals = [];
+
+            // get control values
+            $.each(timelineDataObj.control, function(k, val) {
+                arrConVal.push(val);
+            });
+
+            // get experiment values 
+            $.each(timelineDataObj.experiment, function(k, val) {
+                arrExpVals.push(val);
+            });
 
             // show the graph
             $('.js-highchart-' + kpi).highcharts({

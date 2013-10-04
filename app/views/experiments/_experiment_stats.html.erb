@@ -58,23 +58,7 @@
                     </tr>
 
                     <script type="text/javascript">
-
-                        var timelineDataObj_<%= kpi %> = timelineData.<%= kpi %>,
-                            arrConVal_<%= kpi %>       = [], // control values
-                            arrExpVals_<%= kpi %>      = []; // experiment values
-
-                        // get control values
-                        $.each(timelineDataObj_<%= kpi %>.control, function(k, val) {
-                            arrConVal_<%= kpi %>.push(val);
-                        });
-
-                        // get experiment values 
-                        $.each(timelineDataObj_<%= kpi %>.experiment, function(k, val) {
-                            arrExpVals_<%= kpi %>.push(val);
-                        });
-
-                        experimentData.showGraph('<%= kpi %>',arrConVal_<%= kpi %>,arrExpVals_<%= kpi %>);
-                        
+                        experimentData.showGraph('<%= kpi %>',timelineData.<%= kpi %>);
                     </script>
 
                     <% end %>
