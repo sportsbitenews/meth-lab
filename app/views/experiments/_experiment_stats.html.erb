@@ -24,10 +24,11 @@
                         <script type="text/javascript">
 
                             // sparkline
-                            <% timeline_values = %>
 
+                            // high charts
+                            var timelineData = JSON.stringify(<%= @timeline_data %>);
+                            console.log(timelineData);
                             
-
                         </script>
 
                     <tr>
@@ -53,7 +54,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="8" class="js-highchart-<%= kpi %>">My stats go here</td>
+                        <td colspan="8" class="2js-highchart-<%= kpi %>">Stats go here</td>
                     </tr>
 
                     <% end %>

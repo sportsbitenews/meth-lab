@@ -195,7 +195,7 @@ class ExperimentsController < ApplicationController
   	kpis.each do |kpi|
   		data[kpi] = timeline_data_by_kpi(@experiment, kpi)
   	end
-  	data
+  	data.to_json
   end
 
   def timeline_data_by_kpi(experiment, kpi)
