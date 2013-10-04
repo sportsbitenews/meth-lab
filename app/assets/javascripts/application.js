@@ -11,7 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery-2.0.3.min
+//= require jquery_ujs
+//= require highcharts
 //= require bootstrap.min
 //= require experiments
 //= require updater
-//= require jquery_ujs

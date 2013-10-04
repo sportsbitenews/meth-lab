@@ -3,13 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.experiment-show .hero-unit{
-	padding: 10px 0 26px 40px;
+.experiment-show {
+    .hero-unit {
+        padding: 10px 30px 20px 30px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 }
 
-.row.header{
-	padding-left:20px;
-}
 
 .row .subtitle{
 	padding-top:24px;

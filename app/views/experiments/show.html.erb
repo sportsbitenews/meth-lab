@@ -1,27 +1,31 @@
-<div class="experiment-show">
-<div class="row header">
-	<h1><%=@experiment.name.titleize if @experiment.name%></h1>
-	<p class="subtitle">
-		<code>(<%=@experiment.id%>)</code>
-		<span class="pull-right">Started at <%=nice_datetime(@experiment.start_time)%><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
-	</p>
-</div>
 
-<%#=simple_experiment(2, "Order Pizza Now!", "Get Your Pizzas Here...") %>
-<div class="row">
-		<div data-ajax="false" data-target="/experiments/stats/<%=@experiment.id%>?type=header" data-interval="3">
-			<%=render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
-		</div>
-</div>
-<div data-ajax="true" data-target="/experiments/stats/<%=@experiment.id%>" data-interval="3">
-	<%=render :partial => 'experiment_stats', :locals => {:experiment => @experiment}%>
-</div>
+<article class="experiment-show">
+    
+    <header class="row">
+        <div class="span12">
+        	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
+        	<p class="subtitle">
+        		<code>(<%= @experiment.id %>)</code>
+        		<span class="pull-right">Started at <%= nice_datetime(@experiment.start_time) %><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+        	</p>
+        </div>
+    </header>
 
-<%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |
-<%=link_to "Destroy", delete_experiment_path(@experiment.id, :list=>'active'), :confirm => "Are you sure you want to permanently destroy this experiment and all its data?"%> | 
-<%=link_to "Conclude", conclude_experiment_path(@experiment.id), :confirm => "Are you sure you want to finish this experiment?"%> |
-<%=link_to "Grab Code", get_code_experiment_path(@experiment.id)%> |
-<%=link_to "Reset", restart_experiment_path(@experiment.id), :confirm => "Are you sure you want to reset this experiment and loose all data collected so far?"%> |
-<%= link_to 'Back', experiments_path %>
+    <div class="row" data-ajax="false" data-target="/experiments/stats/<%= @experiment.id %>?type=header" data-interval="3">
+		<%= render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
+    </div>
 
-</div>
+    <div class="row" data-ajax="true" data-target="/experiments/stats/<%= @experiment.id %>" data-interval="23">
+	   <%= render :partial => 'experiment_stats', :locals => {:experiment => @experiment}%>
+    </div>
+
+    <footer>
+        <%= link_to 'Edit', edit_experiment_path(@experiment.id) %> |
+        <%= link_to "Destroy", delete_experiment_path(@experiment.id, :list=>'active'), :confirm => "Are you sure you want to permanently destroy this experiment and all its data?"%> | 
+        <%= link_to "Conclude", conclude_experiment_path(@experiment.id), :confirm => "Are you sure you want to finish this experiment?"%> |
+        <%= link_to "Grab Code", get_code_experiment_path(@experiment.id)%> |
+        <%= link_to "Reset", restart_experiment_path(@experiment.id), :confirm => "Are you sure you want to reset this experiment and loose all data collected so far?"%> |
+        <%= link_to 'Back', experiments_path %>
+    </footer>
+
+</article>

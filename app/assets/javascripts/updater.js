@@ -12,7 +12,9 @@
                 divInterval = dataDiv.data('interval');
 
             if (dataDiv.length > 0) {
-                experimentData.experimentDataInterval = window.setInterval(function(){experimentData.updateData(dataDiv,divTarget)}, parseInt(divInterval*1000));
+                experimentData.experimentDataInterval = window.setInterval(function() {
+                    experimentData.updateData(dataDiv,divTarget)
+                }, parseInt(divInterval*1000));
             }
 
         },
@@ -27,6 +29,7 @@
                 success:function(response) {
                     $(ele).empty();
                     $(ele).append(response);
+                    console.log(response);
                 }
             });
         }
