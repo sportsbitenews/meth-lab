@@ -16,7 +16,9 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-    @experiment = Lacmus::Experiment.find(params[:id])
+    @experiment 	 = Lacmus::Experiment.find(params[:id])
+    @timeline_data = prepare_timeline_data(@experiment)
+
     respond_to do |format|
       format.html # show.html.erb
       # format.json { render json:  }
@@ -56,36 +58,19 @@ class ExperimentsController < ApplicationController
   end
 
   def experiment_stats
-    @experiment = Lacmus::Experiment.find(params[:id])
+    @experiment 	 = Lacmus::Experiment.find(params[:id])
+    @timeline_data = prepare_timeline_data(@experiment)
+
     respond_to do |format|
       format.html do
         if params[:type].to_s == 'header'
-          render :partial => 'experiment_header', :locals => {:experiment => @experiment} and return
+          render :partial => 'experiment_header', :locals => {:experiment => @experiment, :timeline => @timeline_data} and return
         else
-          render :partial => 'experiment_stats', :locals => {:experiment => @experiment}
+          render :partial => 'experiment_stats', :locals => {:experiment => @experiment, :timeline => @timeline_data}
         end
       end
       # format.json { render json:  }
     end
-  end
-
-  def timeline_data
-  	if Rails.env.development?
-  		render json: mock_timeline_data and return
-  	end
-
-  	@experiment = Lacmus::Experiment.find(params[:id])
-  	kpi 				= params[:kpi]
-
-  	if @experiment.nil? || kpi.nil?
-  		render json: {control: [], experiment: []} and return
-  	end
-
-  	data = {
-  		control: 		@experiment.conversion_timeline_data(kpi, false),
-			experiment: @experiment.conversion_timeline_data(kpi, true)
-  	}
-  	render json: data
   end
 
   # GET /experiments/new
@@ -203,6 +188,26 @@ class ExperimentsController < ApplicationController
   # end
 
   private
+
+  def prepare_timeline_data(experiment)
+  	data = {}
+  	kpis = experiment.experiment_kpis.keys
+  	kpis.each do |kpi|
+  		data[kpi] = timeline_data_by_kpi(@experiment, kpi)
+  	end
+  	data
+  end
+
+  def timeline_data_by_kpi(experiment, kpi)
+  	if Rails.env.development?
+  		return mock_timeline_data
+  	end
+
+  	data = {
+  		control: 		experiment.conversion_timeline_data(kpi, false),
+			experiment: experiment.conversion_timeline_data(kpi, true)
+  	}
+  end
 
   def mock_timeline_data(amount = 200)
   	control_stub 		= []
