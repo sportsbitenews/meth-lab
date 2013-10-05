@@ -79,15 +79,9 @@
 
         showGraph: function(kpi,timelineDataObj) {
 
-            var arrConVal  = [],
-                arrExpVals = [];
+            var arrExpVals = [];
 
-            // get control values
-            $.each(timelineDataObj.control, function(k, val) {
-                arrConVal.push(val);
-            });
-
-            // get experiment values 
+            // get values 
             $.each(timelineDataObj.experiment, function(k, val) {
                 arrExpVals.push(val);
             });
@@ -102,8 +96,8 @@
                     ignoreHiddenSeries: true
                 },
                 colors: [
-                   '#2f7ed8', // color for control
-                   '#0d233a', // color for experiment
+                   '#2f7ed8', // color for line
+                   '#0d233a',
                    '#8bbc21', 
                    '#910000', 
                    '#1aadce', 
@@ -127,7 +121,12 @@
                         text: null
                     },
                     endOnTick: true,
-                    maxPadding: 0
+                    maxPadding: 0,
+                    plotLines: [{
+                        color: '#FF4D4D',
+                        width: 2,
+                        value: 0
+                    }]
                 },
                 tooltip: {
                     formatter: function() {
@@ -155,10 +154,7 @@
                     }
                 },
                 series: [{
-                    name: 'Control',
-                    data: arrConVal
-                }, {
-                    name: 'Experiment',
+                    name: 'Performance',
                     data: arrExpVals
                 }]
             });
