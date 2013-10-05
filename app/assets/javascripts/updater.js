@@ -82,7 +82,7 @@
             var arrExpVals = [];
 
             // get values 
-            $.each(timelineDataObj.experiment, function(k, val) {
+            $.each(timelineDataObj.performance, function(k, val) {
                 arrExpVals.push(val);
             });
 

@@ -3,7 +3,6 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    # simple_experiment(2, "default title", "experiment title")
     @slots = Lacmus::SlotMachine.experiment_slot_ids
     @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
     @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)
@@ -202,27 +201,21 @@ class ExperimentsController < ApplicationController
   	data.to_json
   end
 
+ 	# {
+	# 	control: 		experiment.conversion_timeline_data(kpi, false),
+	# 	experiment: experiment.conversion_timeline_data(kpi, true)
+	# }
   def timeline_data_by_kpi(experiment, kpi)
-  	if Rails.env.development?
-  		return mock_timeline_data
-  	end
-
-  	{
-  		control: 		experiment.conversion_timeline_data(kpi, false),
-			experiment: experiment.conversion_timeline_data(kpi, true)
-  	}
+  	return mock_timeline_data if Rails.env.development?
+  	{performance: experiment.timeline_performance_perc(kpi)}
   end
 
+	# simple_experiment(1, "default title", "experiment title")
+	# mark_kpi!('ftb')
   def mock_timeline_data(amount = 200)
-  	control_stub 		= []
-  	experiment_stub = []
-
-  	amount.times do |i|
-  		control_stub << rand().round(5)
-  		experiment_stub << rand().round(5)
-  	end
-
-  	{control: control_stub, experiment: experiment_stub}
+  	performance_stub = []
+  	amount.times {|i| performance_stub << rand().round(5)}
+  	{performance: performance_stub}
   end
 
 end
