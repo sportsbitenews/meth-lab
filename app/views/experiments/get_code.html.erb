@@ -11,21 +11,21 @@
 <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class="function">render_control_version(</span><span class="args experiment-id"><%=params[:id]%></span><span class="function">)</span> <span class='block-do'>do</span>
 <span class='comment'>  # your code for the control group goes here... (people who will see the
   # default version of your site)</span>
-  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Order Pizza Now!"</span>
+  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Check out my Gig Extras!"</span>
 <span class="function">end</span>
 
 <span class="function">render_experiment_version(</span><span class="args experiment-id"><%=params[:id]%></span><span class="function">)</span> <span class='block-do'>do</span>
 <span class='comment'>  # your code for the experiment group goes here... ( people who will see a new 
   # version of your site)</span>
-  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Get Your Pizzas Here..."</span>
+  <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Check out more stuff I'm willing to do"</span>
 <span class="function">end</span>
 </code></pre>
   
       <h2><small>Option Two: Simple, One Function Test</small></h2>
 
-  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='comment'># your code for the control group who get the 
+  <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='comment'>  # your code for the control group who get the 
   # default version of your site here.</span>
-  <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Order Pizza Now!", "Get Your Pizzas Here..."</span><span class="function">)</span> <span class='block-do'></span>
+  <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Check out my Gig Extras!", "Check out more stuff I'm willing to do"</span><span class="function">)</span> <span class='block-do'></span>
 </code></pre>
 
     <div class="large-space-from-top"></div>

@@ -1,15 +1,15 @@
 
-<h1>Active Experiment Slices</h1>
+<h1>Active Experiment</h1>
 <h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
 
 <%=render :partial => 'slot_machine', :locals => {:slots => @slots}%>
 
 <div class="row large-space-from-top">
   <div class="span6">
-    <h2>Pending Experiment Slices</h2>
+    <h2>Pending Experiment</h2>
   </div>
   <div class="span2 pull-right">
-      <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Slice</a>
+      <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Test</a>
   </div>
 </div>
 

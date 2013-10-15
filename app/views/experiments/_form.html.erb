@@ -13,14 +13,14 @@
     <div class="control-group">
       <label class="control-label" for="inputEmail">Name</label>
       <div class="controls">
-        <%=text_field_tag "name", @experiment.name, :placeholder => "Humanized Name"%>
+        <%=text_field_tag "name", @experiment.name, :placeholder => "Humanized name"%>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label" for="inputEmail">Description</label>
       <div class="controls">
-        <%=text_area_tag "description", @experiment.description, :placeholder => "What does this experiment slice test?", :rows=>"3"%>
+        <%=text_area_tag "description", @experiment.description, :placeholder => "What does this experiment test?", :rows=>"3"%>
       </div>
     </div>
 
