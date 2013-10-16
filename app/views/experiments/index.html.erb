@@ -1,19 +1,40 @@
 
-<h1>Active Experiment</h1>
-<h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
+<section class="experiment-list">
 
-<%=render :partial => 'slot_machine', :locals => {:slots => @slots}%>
+    <article class="experiment">
 
-<div class="row large-space-from-top">
-  <div class="span6">
-    <h2>Pending Experiment</h2>
-  </div>
-  <div class="span2 pull-right">
-      <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Test</a>
-  </div>
-</div>
+        <header>
+            <h1 class="no-pad">Active Experiment</h1>
+            <h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
+        </header>
 
-<%=render :partial => 'slice_table', :locals => {:experiments => @pending_experiments, :type=> :pending}%>
+        <%= render :partial => 'slot_machine', :locals => {:slots => @slots} %>
 
-<h2>Completed Experiments</h2>
-<%=render :partial => 'slice_table', :locals => {:experiments => @completed_experiments, :type=> :completed}%>
+    </article>
+
+    <article class="experiment">
+
+        <header class="row">
+            <div class="span10">
+                <h2>Pending Experiment</h2>
+            </div>
+            <div class="span2">
+                <a class="btn btn-success btn-large pull-right" href="/experiments/new">New Test</a>
+            </div>
+        </header>
+
+        <%= render :partial => 'slice_table', :locals => {:experiments => @pending_experiments, :type=> :pending} %>
+
+    </article>
+
+    <article class="experiment">
+
+        <header>
+            <h2>Completed Experiments</h2>
+        </header>
+
+        <%= render :partial => 'slice_table', :locals => {:experiments => @completed_experiments, :type=> :completed} %>
+
+    </article>
+
+</section>

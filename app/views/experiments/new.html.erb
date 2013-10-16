@@ -1,11 +1,22 @@
-<h1>Configure Experiment Slot</h1>
 
-<div class="row ">
-  <span class="span12"> 
-  <%= form_tag('/experiments', :method => :post, :class=>'medium-space-from-top')  do%>
-  	<%= render 'form' %>
-  <% end %>
-  </span>
-</div>
+<article class="experiment-configure">
 
-<%= link_to 'Back', experiments_path %>
+    <header>
+        <h1>Configure Experiment Slot</h1>
+    </header>
+
+    <div class="row">
+        <span class="span12">
+
+            <%= form_tag('/experiments', :method => :post, :class => "experiment-configure-form") do %>
+                <%= render 'form' %>
+            <% end %>
+
+        </span>
+    </div>
+
+    <footer>
+        <%= link_to 'Back', experiments_path %>
+    </footer>
+
+</article>

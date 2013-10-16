@@ -1,22 +1,20 @@
 
 <article class="experiment-show">
     
-    <header class="row">
-        <div class="span12">
-        	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
-        	<p class="subtitle">
-        		<code>(<%= @experiment.id %>)</code>
-        		<span class="pull-right">Started at <%= nice_datetime(@experiment.start_time) %><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
-        	</p>
-        </div>
+    <header>
+    	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
+    	<p class="subtitle">
+    		<code>(<%= @experiment.id %>)</code>
+    		<span class="pull-right">Started at <%= nice_datetime(@experiment.start_time) %><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+    	</p>
     </header>
 
     <div class="row" data-ajax="false" data-target="/experiments/stats/<%= @experiment.id %>?type=header" data-interval="3">
-		<%= render :partial => 'experiment_header', :locals => {:experiment => @experiment}%>
+		<%= render :partial => 'experiment_header', :locals => {:experiment => @experiment} %>
     </div>
 
-    <div class="row" data-ajax="true" data-target="/experiments/stats/<%= @experiment.id %>" data-interval="5">
-        <%= render :partial => 'experiment_stats', :locals => {:experiment => @experiment}%>
+    <div class="row" data-ajax="<% if @experiment.status.to_s == "active" %>true<% else %>false<% end %>" data-target="/experiments/stats/<%= @experiment.id %>" data-interval="5">
+        <%= render :partial => 'experiment_stats', :locals => {:experiment => @experiment} %>
     </div>
 
     <footer>
