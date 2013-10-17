@@ -4,8 +4,8 @@ class ExperimentsController < ApplicationController
   # GET /experiments.json
   def index
     @slots = Lacmus::SlotMachine.experiment_slot_ids
-    @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending).select {|e| e.id > 7000}
-    @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed).select {|e| e.id > 7000}
+    @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
+    @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @experiments }
