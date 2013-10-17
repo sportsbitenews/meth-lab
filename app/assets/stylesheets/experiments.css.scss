@@ -1,7 +1,15 @@
-// Place all the styles related to the Experiments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+    padding-bottom: 50px;
+}
 
+
+h1 {
+    padding-bottom: 25px;
+
+    &.no-pad {
+        padding-bottom: 0px;
+    }
+}
 
 .experiment-show {
 
@@ -43,71 +51,77 @@
     }
 }
 
+.experiment-list {
+    .experiment {
+        padding-bottom: 25px;
 
-.row .subtitle{
-	padding-top:24px;
+        > header {
+            padding-bottom: 10px;
+        }
+    }
 }
 
-.small-space-from-top{
-	margin-top:10px;
+.experiment-getcode {
+
+    > header {
+        .pull-right {
+            text-align: right;
+        }
+    }
 }
 
-.medium-space-from-top{
-	margin-top:30px;
-}
+.medium-space-from-top { margin-top: 30px; }
+.large-space-from-top { margin-top: 50px; }
 
-.large-space-from-top{
-	margin-top:50px;
-}
+pre {
+	background-color: #3D3B3B;
+	padding: 20px;
 
-.code-comment{
-	color:#aaa;
-}
-
-pre{
-	background-color:#3D3B3B;
-	padding:20px;
-
-	.comment{
-		color:#5A7C70;
+	.comment {
+		color: #5A7C70;
 	}
 
-	.function{
-		color:white;
+	.function {
+		color: #fff;
 	}
-	.args{
-		color:rgb(216, 201, 26);
+
+	.args {
+		color: rgb(216, 201, 26);
 	}
-	.class-var{
-		color:orange;
+
+	.class-var {
+		color: orange;
 	}
-	.operator{
-		color:lightblue;
+
+	.operator {
+		color: lightblue;
 	}
-	.string{
-		color:rgb(189, 142, 44);
+
+	.string {
+		color: rgb(189, 142, 44);
 	}
-	.block-do{
-		color:lightblue;
+
+	.block-do {
+		color: lightblue;
 	}
 }
 
-#error_explanation{
-	color:darkred;
+#error_explanation {
+	color: darkred;
 }
 
 code {
 	font-size: 16px;
 }
 
-.label-disabled{
-	background-color:#eee;
-	color:#999;
+.label-disabled {
+	background-color: #eee;
+	color: #999;
 	text-shadow: none;
-	font-weight:normal;
+	font-weight: normal;
 }
 
-td.error {color:red;}
-td.success {color:darkgreen;}
-td.warning {color:orange;}
-td.disabled {color:#bbb;}
+td.error { color: red; }
+td.success { color: darkgreen; }
+td.warning { color: orange; }
+td.disabled { color: #bbb; }

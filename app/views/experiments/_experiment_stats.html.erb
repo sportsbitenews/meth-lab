@@ -36,21 +36,23 @@
 
                     <tr class="js-data-main" data-kpi="<%= kpi %>">
                         <td><%= kpi %></td>
-                        <td><%= @experiment.control_kpis[kpi].to_i  %></td>
+                        <td><%= @experiment.control_kpis[kpi].to_i %></td>
                         <td><%= "%.4f" % @experiment.control_conversion(kpi) %>%</td>
                         <td><%= @experiment.experiment_kpis[kpi].to_i %></td>
                         <td><%= "%.4f" % @experiment.experiment_conversion(kpi) %>%</td>
                         <td class="<%=class_for_goal_row(@experiment, kpi)%>"><%="%.4f" % @experiment.performance_perc(kpi) unless @experiment.performance_perc(kpi).to_i.zero? %>%</td>
                         <td style="padding-top:2px;">
-                            <div style="font-size:10px; padding:0;">
-                                <% percent_complete = @experiment.experiment_progress(kpi) %>
-                                <%= percent_complete.to_i %>%, 
-                                <% @views_needed = @experiment.remaining_participants_needed(kpi) %>
-                                <%= @views_needed > 0 ? "#{@views_needed} views needed" : "Sufficient Data" %>
-                            </div>
-                            <div class="progress progress-striped active" style="height:6px;background:#ddd;padding:0;margin:0;">
-                                <div class="bar" style="width: <%= percent_complete %>%;"> </div>
-                            </div>
+                            <% if @experiment.control_kpis[kpi].to_i > 100 %>
+                                <div style="font-size:10px; padding:0;">
+                                    <% percent_complete = @experiment.experiment_progress(kpi) %>
+                                    <%= percent_complete.to_i %>%, 
+                                    <% @views_needed = @experiment.remaining_participants_needed(kpi) %>
+                                    <%= @views_needed > 0 ? "#{@views_needed} views needed" : "Sufficient Data" %>
+                                </div>
+                                <div class="progress progress-striped active" style="height:6px;background:#ddd;padding:0;margin:0;">
+                                    <div class="bar" style="width: <%= percent_complete %>%;"> </div>
+                                </div>
+                            <% end %>
                         </td>
                     </tr>
                     <tr class="js-data-graph js-data-graph-<%= kpi %>">

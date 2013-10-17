@@ -1,13 +1,22 @@
-<div class="row">
-    <div class="span8">
-        <h1>Great! Now, grab the code</h1>
-        <h2><small>Option One: Two Ruby blocks, one for each variation</small></h2>
-    </div>
-    <div class="span2 pull-right">
-          <%= link_to "Finish", root_path ,:class=>'btn btn-success btn-large' %>
-    </div>
-</div>
-<div class="row"><div class="span12">
+
+<section class="experiment-getcode">
+
+    <header class="row">
+        <div class="span10">
+            <h1>Great! Now, grab the code</h1>
+        </div>
+        <div class="span2 pull-right">
+            <%= link_to "Finish", root_path ,:class=>"btn btn-success btn-large" %>
+        </div>
+    </header>
+
+    <article class="row">
+        <div class="span12">
+
+            <header>
+                <h2><small>Option One: Two Ruby blocks, one for each variation</small></h2>
+            </header>
+
 <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class="function">render_control_version(</span><span class="args experiment-id"><%=params[:id]%></span><span class="function">)</span> <span class='block-do'>do</span>
 <span class='comment'>  # your code for the control group goes here... (people who will see the
   # default version of your site)</span>
@@ -20,18 +29,36 @@
   <span class='class-var'>@my_title</span> <span class='operator'>=</span> <span class='string'>"Check out more stuff I'm willing to do"</span>
 <span class="function">end</span>
 </code></pre>
+
+        </div>
+    </article>
+
+    <article class="row">
+        <div class="span12">
   
-      <h2><small>Option Two: Simple, One Function Test</small></h2>
+            <header>
+                <h2><small>Option Two: Simple, One Function Test</small></h2>
+            </header>
 
   <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='comment'>  # your code for the control group who get the 
   # default version of your site here.</span>
   <span class='class-var'>@result = </span><span class="function">simple_experiment(</span><span class="args experiment-id"><%=params[:id]%>, "Check out my Gig Extras!", "Check out more stuff I'm willing to do"</span><span class="function">)</span> <span class='block-do'></span>
 </code></pre>
 
-    <div class="large-space-from-top"></div>
-      <h2>Caching the experiment area? Add this to your cache key</h2>
+        </div>
+    </article>
+
+    <article class="row">
+        <div class="span12">
+
+            <header>
+                <h2>Caching the experiment area? Add this to your cache key</h2>
+            </header>
+
   <pre><code><a class="btn pull-right" href="#"><i class="icon-file"></i></a><span class='class-var'>@my_key = </span><span class="string">"my_existing_key-#{<span class="function">lacmus_cache_key</span>}"</span>
 </code></pre>
 
-    </div>
-</div>
+        </div>
+    </article>
+
+</section>

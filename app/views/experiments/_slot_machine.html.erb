@@ -1,57 +1,55 @@
-<table class="table table-striped table-bordered table-hover medium-space-from-top">
-  <tr>
-    <th>Slot</th>
-    <th>Experiment Slice</th>
-  	<th>ID</th>
-    <th>Exposures</th>
-    <th>KPI hits</th>
-    <th>Start</th>
-    <th>Status</th>
-  </tr>
-  <% slots.each_with_index do |slot, index| %>
-  <%-if slot_is_control_group?(slot)-%>
-    <tr>
-      <td><%=index%></td>
-      <td colspan="3">Control Group Slice</td>
-      <td>----</td>
-      <td>----</td>
-      <td><span class="label label-success">Active</span></td>
-    </tr>
-  <%-elsif slot.blank? || slot==-1-%>
-    <tr>
-      <td><%=index%></td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-      <td>----</td>
-    </tr>
-  <%-else-%>
-      <%- experiment = Lacmus::Experiment.find(slot.to_i)-%>
-      <%#- experiment = {:experiment_id => slot.to_i, :name => '-- ERROR --'} if experiment == {}-%>
-    <tr>
-      <td><%=index%></td>
-      <td><%= link_to experiment.name.to_s, experiment_path(slot) %></td>
-      <td><%=experiment.id if experiment.id.present?%></td>      
-      <td><%=experiment.experiment_analytics[:exposures].to_i%></td>
-      <td><%=experiment.experiment_kpis.values.sum.to_i%></td>      
-      <td>
-        <%= nice_datetime(experiment.start_time)%> (<%=time_ago_from_int(experiment.start_time)%>)
-      </td>
-
-      <!-- <td> -->
-        <%#=link_to "destroy", delete_experiment_path(experiment[:experiment_id], :list=>'active'), :confirm => "Are you sure?" if experiment.present?%>
-        <%#=link_to( "conclude", conclude_experiment_path(experiment[:experiment_id]), :confirm => "Are you sure?")%>
-      <!-- </td> -->
-      <td class="status">
-        <%-if experiment.experiment_analytics[:exposures].to_i < 1-%>
-          <span class="label label-disabled">Waiting For Data...</span>
-        <%-else-%>
-          <span class="label label-success">Active</span>
-        <%-end-%>
-      </td>
-    </tr>    
-  <%-end-%>
-<% end %>
-</table>
+        
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>Slot</td>
+                    <td>Experiment Slice</td>
+                    <td>ID</td>
+                    <td>Exposures</td>
+                    <td>KPI hits</td>
+                    <td>Start</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+            <% slots.each_with_index do |slot, index| %>
+                <% if slot_is_control_group?(slot) %>
+                    <tr>
+                        <td><%= index %></td>
+                        <td colspan="3">Control Group Slice</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td><span class="label label-success">Active</span></td>
+                    </tr>
+                <% elsif slot.blank? || slot==-1 %>
+                    <tr>
+                        <td><%= index %></td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                    </tr>
+                <% else %>
+                    <% experiment = Lacmus::Experiment.find(slot.to_i) %>
+                    <tr>
+                        <td><%= index %></td>
+                        <td><%= link_to experiment.name.to_s, experiment_path(slot) %></td>
+                        <td><%= experiment.id if experiment.id.present? %></td>      
+                        <td><%= experiment.experiment_analytics[:exposures].to_i %></td>
+                        <td><%= experiment.experiment_kpis.values.sum.to_i %></td>      
+                        <td><%= nice_datetime(experiment.start_time) %> (<%= time_ago_from_int(experiment.start_time) %>)</td>
+                        <td class="status">
+                            <% if experiment.experiment_analytics[:exposures].to_i < 1 %>
+                            <span class="label label-disabled">Waiting For Data...</span>
+                            <% else %>
+                            <span class="label label-success">Active</span>
+                            <% end %>
+                        </td>
+                    </tr>    
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+    

@@ -1,13 +1,23 @@
-<h1>Editing dashboard</h1>
 
-<div class="row ">
-  <span class="span12"> 
-  <%= form_tag(experiment_path(params[:id]), :method => :put, :class=>'medium-space-from-top')  do%>
-  	<%= render 'form' %>
-  <% end %>
-  </span>
-</div>
+<article class="experiment-configure">
 
+    <header>
+        <h1>Edit Dashboard</h1>
+    </header>
 
-<%= link_to 'Show', @dashboard %> |
-<%= link_to 'Back', experiments_path %>
+    <div class="row">
+        <span class="span12">
+
+            <%= form_tag(experiment_path(params[:id]), :method => :put, :class=>'experiment-configure-form') do %>
+                <%= render 'form' %>
+            <% end %>
+
+        </span>
+    </div>
+
+    <footer>
+        <%= link_to 'Show', @dashboard %> |
+        <%= link_to 'Back', experiments_path %>
+    </footer>
+
+</article>
