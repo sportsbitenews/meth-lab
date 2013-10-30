@@ -4,11 +4,22 @@
     <header>
     	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
     	<p class="subtitle">
-    		<code>(<%= @experiment.id %>)</code>
-    		<span class="pull-right">Started at <%= nice_datetime(@experiment.start_time) %><%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+    		<code>ID: <%= @experiment.id %></code><br/><br/>
+    		<span class="pull-right">Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)<%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+    		<%-if @experiment.url.present?-%>
+    		<span class="pull-left">Preview: <%=link_to 'Experiment', experiment_preview_url(@experiment), :target=>:blank %> | <%=link_to 'Control', control_preview_url(@experiment), :target=>:blank%></span> 
+    		<%-else-%>
+    		<span class="pull-left">Preview Not Available (experiment URL not defined).</span>
+    		<%-end-%>
     	</p>
     </header>
 
+<!-- 		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#">Stats</a></li>
+		  <li><a href="#">Control Preview</a></li>
+		  <li><a href="#">Experiment Preview</a></li>
+		</ul>
+ -->
     <div class="row" data-ajax="false" data-target="/experiments/stats/<%= @experiment.id %>?type=header" data-interval="3">
 		<%= render :partial => 'experiment_header', :locals => {:experiment => @experiment} %>
     </div>
@@ -27,3 +38,7 @@
     </footer>
 
 </article>
+
+<!--    <iframe class="experiment-preview" style="width:100%;border:1px gray solid;" src="<%=control_preview_url(@experiment)%>"></iframe>
+   <iframe class="experiment-preview" style="width:100%;border:1px gray solid;" src="<%=experiment_preview_url(@experiment)%>"></iframe>
+ -->

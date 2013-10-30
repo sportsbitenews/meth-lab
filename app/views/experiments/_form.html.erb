@@ -18,6 +18,13 @@
             </div>
 
             <div class="control-group">
+                <label class="control-label" for="inputEmail">Url</label>
+                <div class="controls">
+                    <%= text_field_tag "url", @experiment.url, :placeholder => "Url of experiment page" %>
+                </div>
+            </div>
+
+            <div class="control-group">
                 <label class="control-label" for="inputEmail">Description</label>
                 <div class="controls">
                     <%= text_area_tag "description", @experiment.description, :placeholder => "What does this experiment test?", :rows=>"3" %>

@@ -3,7 +3,15 @@ module ExperimentsHelper
 	def slot_is_control_group?(slot)
 		(slot == 0)
 	end
+
+	def experiment_preview_url(experiment)
+		"#{experiment.url}?render-variation=experiment"
+	end
 	
+	def control_preview_url(experiment)
+		"#{experiment.url}?render-variation=control"
+	end
+
 
 	def class_for_goal_row(experiment, kpi)
 			performance_percent = experiment.performance_perc(kpi)
