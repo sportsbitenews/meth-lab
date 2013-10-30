@@ -79,7 +79,19 @@
 
         showGraph: function(kpi,timelineDataObj) {
 
-            var arrExpVals = [];
+            var arrExpVals   = [],
+                startTime    = document.pageScope.startTime,
+                startTimeArr = [],
+                startYear    = 0,
+                startMonth   = 0,
+                startDay     = 0;
+
+            // format start time
+            startTimeArr = startTime.split(" ");
+            startTimeArr = startTimeArr[0].split("-");
+            startYear = parseInt(startTimeArr[0]);
+            startMonth = parseInt(startTimeArr[1]);
+            startDay = parseInt(startTimeArr[2]);
 
             // get values 
             $.each(timelineDataObj.performance, function(k, val) {
@@ -116,6 +128,9 @@
                         display: 'none'
                     }
                 },
+                xAxis: {
+                    type: 'datetime'
+                },
                 yAxis: {
                     title: {
                         text: null
@@ -127,11 +142,6 @@
                         width: 2,
                         value: 0
                     }]
-                },
-                tooltip: {
-                    formatter: function() {
-                        return this.series.name + ': <b>'+ this.x + '</b> / <b>'+ this.y +'%</b>';
-                    }
                 },
                 legend: {
                     layout: 'vertical',
@@ -155,7 +165,9 @@
                 },
                 series: [{
                     name: 'Performance',
-                    data: arrExpVals
+                    data: arrExpVals,
+                    pointStart: Date.UTC(startYear, (startMonth-1), startDay),
+                    pointInterval: 3600000 // 1 hour
                 }]
             });
         }

@@ -213,7 +213,7 @@ class ExperimentsController < ApplicationController
 
 	# simple_experiment(1, "default title", "experiment title")
 	# mark_kpi!('ftb')
-  def mock_timeline_data(amount = 200)
+  def mock_timeline_data(amount = 50)
   	performance_stub = []
   	amount.times {|i| performance_stub << rand().round(5)}
   	{performance: performance_stub}
