@@ -25,6 +25,13 @@
             </div>
 
             <div class="control-group">
+                <label class="control-label" for="inputEmail">Url</label>
+                <div class="controls">
+                    <%= select_tag "type", options_for_select(['Local', 'Global'], @experiment.type) %>
+                </div>
+            </div>
+
+            <div class="control-group">
                 <label class="control-label" for="inputEmail">Description</label>
                 <div class="controls">
                     <%= text_area_tag "description", @experiment.description, :placeholder => "What does this experiment test?", :rows=>"3" %>

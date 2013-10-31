@@ -2,8 +2,9 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>Experiment Slice</td>
+                    <td>Experiment Name</td>
                     <td>ID</td>
+                    <td>Type</td>
                     <td>Start</td>
                     <td>End</td>
                     <td>Status</td>
@@ -28,17 +29,18 @@
                     <tr>
                         <td><%= link_to experiment.name, experiment_path(experiment.id) %></td>
                         <td><%= experiment.id %></td>
+                        <td><%= experiment.type %></td>
                         <td><%= nice_datetime(experiment.start_time) %> (<%= time_ago_from_int(experiment.start_time) %>)</td>
                         <td><%= nice_datetime(experiment.end_time) %> (<%= time_ago_from_int(experiment.end_time) %>)</td>
                         <td>
                             <span class="pull-right">
-                            <% if type == :pending %>
+                            <% if experiment.status == :pending %>
                                 <%= link_to 'activate', activate_experiment_path(experiment.id) %>
                             <% else %>
                                 <%= link_to 'reactivate', reactivate_experiment_path(experiment.id) %>
                             <% end %>
                             -
-                            <%= link_to( "destroy", delete_experiment_path(experiment.id, :list => type.to_s), :confirm => "Are you sure?") %>
+                            <%= link_to( "destroy", delete_experiment_path(experiment.id), :confirm => "Are you sure?") %>
                             </span>
                         </td>
                     </tr>    

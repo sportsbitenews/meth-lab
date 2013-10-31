@@ -4,12 +4,28 @@
     <article class="experiment">
 
         <header>
-            <h2><%=simple_experiment(2, "control", "experiment") %></h2>
-            <h1 class="no-pad">Active Experiments</h1>
-            <h5 class="pull-right"><%=@slots.count.to_s%> Active Slots</h5>
+        		<!--  Temp leaving this to test the control/exp preview -->
+            <!-- <h2><%=simple_experiment(2, "control", "experiment") %></h2> -->
+            <h2 class="no-pad">Global Active Experiments</h2>
+            <h5 class="pull-right"><%=@global_experiments.count.to_s%> Active Slots</h5>
         </header>
 
-        <%= render :partial => 'slot_machine', :locals => {:slots => @slots} %>
+        <%= render :partial => 'slot_machine', :locals => {:slots => @global_experiments} %>
+
+    </article>
+
+    <article class="experiment">
+
+        <header class="row">
+            <div class="span10">
+                <h2>Local Active Experiments</h2>
+            </div>
+            <div class="span2">
+                <a class="btn btn-success btn-large pull-right" href="/experiments/new">New</a>
+            </div>
+        </header>
+
+        <%= render :partial => 'slice_table', :locals => {:experiments => @local_experiments} %>
 
     </article>
 
@@ -19,12 +35,9 @@
             <div class="span10">
                 <h2>Pending Experiments</h2>
             </div>
-            <div class="span2">
-                <a class="btn btn-success btn-large pull-right" href="/experiments/new">New</a>
-            </div>
         </header>
 
-        <%= render :partial => 'slice_table', :locals => {:experiments => @pending_experiments, :type=> :pending} %>
+        <%= render :partial => 'slice_table', :locals => {:experiments => @pending_experiments} %>
 
     </article>
 
@@ -34,7 +47,7 @@
             <h2>Completed Experiments</h2>
         </header>
 
-        <%= render :partial => 'slice_table', :locals => {:experiments => @completed_experiments, :type=> :completed} %>
+        <%= render :partial => 'slice_table', :locals => {:experiments => @completed_experiments} %>
 
     </article>
 

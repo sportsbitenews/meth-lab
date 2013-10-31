@@ -3,9 +3,11 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    @slots = Lacmus::SlotMachine.experiment_slot_ids
-    @pending_experiments = Lacmus::Experiment.find_all_in_list(:pending)
+    @global_experiments    = Lacmus::SlotMachine.experiment_slot_ids
+    @local_experiments 		 = Lacmus::Experiment.find_all_in_list(:local)
+    @pending_experiments 	 = Lacmus::Experiment.find_all_in_list(:pending)
     @completed_experiments = Lacmus::Experiment.find_all_in_list(:completed)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @experiments }
@@ -100,6 +102,10 @@ class ExperimentsController < ApplicationController
     if params[:screenshot].present? && params[:screenshot].length < 3
       @experiment.errors << "screenshot should be a URL does not exist or is too short"
     end
+
+    if params[:type].blank?
+      @experiment.errors << "type does not exist"
+    end
   end
 
   # POST /experiments
@@ -133,9 +139,10 @@ class ExperimentsController < ApplicationController
     validate_experiment
 
     if @experiment.errors.empty?
-      @experiment.name = params[:name]
-      @experiment.url = params[:url]
-      @experiment.description = params[:description]
+      @experiment.name 					 = params[:name]
+      @experiment.type 					 = params[:type]
+      @experiment.url  					 = params[:url]
+      @experiment.description 	 = params[:description]
       @experiment.screenshot_url = params[:screenshot_url]
       unless @experiment.save
         @experiment.errors << "failed to create experiment"
