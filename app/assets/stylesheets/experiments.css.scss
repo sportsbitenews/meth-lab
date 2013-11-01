@@ -2,7 +2,6 @@ body {
     padding-bottom: 50px;
 }
 
-
 h1 {
     padding-bottom: 25px;
 
@@ -25,6 +24,17 @@ h1 {
 }
 
 .experiment-show {
+
+    .experiment-head {
+
+        .subtitle {
+            padding: 10px 0 0 0;
+        }
+
+        .pull-left {
+            padding-left: 0;
+        }
+    }
 
     .hero-unit {
         padding: 10px 30px 20px 30px;

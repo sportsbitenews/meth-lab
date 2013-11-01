@@ -1,22 +1,22 @@
 
+<script type="text/javascript">
+    document.pageScope =  {"startTime":"<%= @experiment.start_time %>"};
+</script>
+
 <article class="experiment-show">
     
-    <header>
+    <header class="experiment-head">
     	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
-    	<p class="subtitle">
-    		<code>ID: <%= @experiment.id %></code><br/><br/>
+		<code>ID: <%= @experiment.id %></code>
+        <p class="subtitle clearfix">
     		<span class="pull-right">Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)<%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
-    		<%-if @experiment.url.present?-%>
-    		<span class="pull-left">Preview: <%=link_to 'Experiment', experiment_preview_url(@experiment), :target=>:blank %> | <%=link_to 'Control', control_preview_url(@experiment), :target=>:blank%></span> 
-    		<%-else-%>
-    		<span class="pull-left">Preview Not Available (experiment URL not defined).</span>
-    		<%-end-%>
-    	</p>
+    		<% if @experiment.url.present? %>
+    		  <span class="pull-left">Preview: <%= link_to 'Experiment', experiment_preview_url(@experiment), :target => :blank %> | <%= link_to 'Control', control_preview_url(@experiment), :target => :blank %></span> 
+    		<% else %>
+    		  <span class="pull-left">Preview Not Available (experiment URL not defined).</span>
+    		<% end %>
+        </p>
     </header>
-
-    <script type="text/javascript">
-        document.pageScope =  {"startTime":"<%= @experiment.start_time %>"};
-    </script>
 
 <!-- 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#">Stats</a></li>
