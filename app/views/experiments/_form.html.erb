@@ -52,7 +52,7 @@
               		<ul>
 									  <% @experiment.global_tracked_kpis.each do |kpi| %>
 									      <li>
-									        <%= check_box_tag 'tracked_kpis_list[]', kpi -%>
+									        <%= check_box_tag 'global_tracked_kpis[]', kpi -%>
 									        <%= kpi -%>
 									      </li>
 									  <% end %>

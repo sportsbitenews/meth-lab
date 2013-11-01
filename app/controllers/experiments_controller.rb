@@ -115,7 +115,13 @@ class ExperimentsController < ApplicationController
     validate_experiment
 
     if @experiment.errors.empty?
-    	@experiment = Lacmus::Experiment.create!(name: params[:name], description: params[:description], screenshot_url: params[:screenshot_url], url: params[:url])
+    	@experiment = Lacmus::Experiment.create!(name: 					 					params[:name],
+    																					 description: 	 					params[:description],
+    																					 screenshot_url: 					params[:screenshot_url],
+    																					 url: 					 					params[:url],
+    																					 type: 					 					params[:type],
+    																					 global_tracked_kpis:     params[:global_tracked_kpis],
+    																					 experiment_tracked_kpis: params[:experiment_tracked_kpis])
       @experiment.errors << "failed to create experiment" unless @experiment
     end
 
@@ -144,6 +150,9 @@ class ExperimentsController < ApplicationController
       @experiment.url  					 = params[:url]
       @experiment.description 	 = params[:description]
       @experiment.screenshot_url = params[:screenshot_url]
+      @experiment.type 					 = params[:type]
+      @experiment.global_tracked_kpis 		= params[:global_tracked_kpis]
+      @experiment.experiment_tracked_kpis = params[:experiment_tracked_kpis]
       unless @experiment.save
         @experiment.errors << "failed to create experiment"
       end
