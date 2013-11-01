@@ -44,6 +44,20 @@
                     <%= text_field_tag "screenshot", @experiment.screenshot_url, :placeholder => "URL" %>
                 </div>
             </div>
+<%@experiment.tracked_kpis_list = ['ftb', 'ftg']%>
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Tracked KPIs</label>
+                <div class="controls">
+              		<ul>
+									  <% @experiment.tracked_kpis_list.each do |kpi| %>
+									      <li>
+									        <%= check_box_tag 'tracked_kpis_list[]', kpi -%>
+									        <%= kpi -%>
+									      </li>
+									  <% end %>
+									</ul>
+                </div>
+            </div>
 
             <div class="actions">
                 <%= submit_tag "Continue", :class=>'btn btn-success btn-large' %>
