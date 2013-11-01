@@ -9,7 +9,7 @@
     		<%-if @experiment.url.present?-%>
     		<span class="pull-left">Preview: <%=link_to 'Experiment', experiment_preview_url(@experiment), :target=>:blank %> | <%=link_to 'Control', control_preview_url(@experiment), :target=>:blank%></span> 
     		<%-else-%>
-    		<span class="pull-left">Preview Not Available (experiment URL not defined).</span>
+    		<span class="pull-left">Preview Not Available (experiment URL is missing).</span>
     		<%-end-%>
     	</p>
     </header>
