@@ -4,16 +4,20 @@
     var experimentData = {
 
         experimentDataInterval: null,
+        experimentDataTimer: 0,
+        experimentDataTimerEnd: 600, // 10 minutes
 
         init: function() {
 
             var dataDiv     = $('[data-ajax="true"]'),
                 divTarget   = dataDiv.data('target'),
-                divInterval = dataDiv.data('interval');
+                divInterval = dataDiv.data('interval'),
+                that        = this;
 
             if (dataDiv.length > 0) {
-                experimentData.experimentDataInterval = window.setInterval(function() {
-                    experimentData.updateData(dataDiv,divTarget)
+                that.experimentDataInterval = window.setInterval(function() {
+                    that.updateData(dataDiv,divTarget);
+                    that.experimentDataTimer = that.experimentDataTimer + divInterval;
                 }, parseInt(divInterval*1000));
             }
 
@@ -24,14 +28,26 @@
             });
 
             // bind show/hide all graphs
-            $(document.body).on('click', '.graph-toggle .js-graphs-show', function(e) {
+            $(document.body).on('click', '.js-graph-toggle .js-graphs-show', function(e) {
                 e.preventDefault();
                 $('.js-experiment-data .js-data-main').addClass('graph-active');
             });
 
-            $(document.body).on('click', '.graph-toggle .js-graphs-hide', function(e) {
+            $(document.body).on('click', '.js-graph-toggle .js-graphs-hide', function(e) {
                 e.preventDefault();
                 $('.js-experiment-data .js-data-main').removeClass('graph-active');
+            });
+
+            $(document.body).on('click', '.js-graph-toggle .js-graphs-resume', function(e) {
+                e.preventDefault();
+                $('.js-graphs-resume-wrap').remove();
+                // restart pushing service
+                that.experimentDataTimer = 0;
+                that.experimentDataInterval = window.setInterval(function() {
+                    that.updateData(dataDiv,divTarget);
+                    that.experimentDataTimer = that.experimentDataTimer + divInterval;
+                }, parseInt(divInterval*1000));
+
             });
 
         },
@@ -73,6 +89,12 @@
 
                     // remove min-height
                     $(ele).css('min-height','0px');
+
+                    // stop push if we're past timer
+                    if (experimentData.experimentDataTimer > experimentData.experimentDataTimerEnd) {
+                        window.clearInterval(experimentData.experimentDataInterval);
+                        $('.js-graph-toggle').append('<span class="js-graphs-resume-wrap">| Data Pulling Paused. <a href="#" class="js-graphs-resume">Resume?</a></span>');
+                    }
                 }
             });
         },
@@ -173,10 +195,42 @@
         }
     };
 
+    var experimentConfigure = {
+
+        init: function() {
+
+            // bind select all checkbox
+            if ($('.js-configure-kpi-global').length > 0) {
+                $('.js-configure-kpi-global').change(function() {
+                    if (this.checked) {
+                        $(this).closest('.control-group').find('.controls input[type="checkbox"]').prop('checked', true);
+                    } else {
+                        $(this).closest('.control-group').find('.controls input[type="checkbox"]').prop('checked', false);
+                    }
+                });
+            }
+
+            // bind add new kpi element
+            if ($('.js-configure-kpi-empty').length > 0) {
+                $('.js-btn-configure-kpi-empty').click(function(e) {
+                    e.preventDefault();
+                    if ($('.js-configure-kpi-empty').val() != '') {
+                        $('.js-configure-kpi-empty').before('<input id="experiment_tracked_kpis_" name="experiment_tracked_kpis[]" type="text" value="' + $('.js-configure-kpi-empty').val() + '">');
+                        $('.js-configure-kpi-empty').val('');
+                    }
+                });
+            }
+
+        }
+
+    };
+
     window.experimentData = experimentData;
+    window.experimentConfigure = experimentConfigure;
 
     $(document).ready(function() {
         experimentData.init();
+        experimentConfigure.init();
     });
 
 })(window, jQuery);

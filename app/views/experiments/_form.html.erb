@@ -11,53 +11,53 @@
         <% end %>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail">Name</label>
+                <label class="control-label" for="name">Name</label>
+                <%= text_field_tag "name", @experiment.name, :placeholder => "Humanized name" %>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="url">Url</label>
+                <%= text_field_tag "url", @experiment.url, :placeholder => "Url of experiment page" %>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="type">Url</label>
+                <%= select_tag "type", options_for_select(['Local', 'Global'], @experiment.type) %>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="description">Description</label>
+                <%= text_area_tag "description", @experiment.description, :placeholder => "What does this experiment test?", :rows=>"3" %>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="screenshot">Screenshot (optional)</label>
+                <%= text_field_tag "screenshot", @experiment.screenshot_url, :placeholder => "URL" %>
+            </div>
+
+            <% @experiment.global_tracked_kpis = ['ftb', 'ftg'] %>
+            <% @experiment.experiment_tracked_kpis = ['ftb', 'ftg'] %>
+            <div class="control-group">
+                <label class="checkbox control-label">
+                    <input id="global_tracked_kpis_" name="global_tracked_kpis[]" type="checkbox" value="all" class="js-configure-kpi-global">Global Tracked KPIs
+                </label>
                 <div class="controls">
-                    <%= text_field_tag "name", @experiment.name, :placeholder => "Humanized name" %>
+                    <% @experiment.global_tracked_kpis.each do |kpi| %>
+                    <label class="checkbox">
+                        <%= check_box_tag 'global_tracked_kpis[]', kpi %>
+                        <%= kpi %>
+                    </label>
+                    <% end %>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail">Url</label>
-                <div class="controls">
-                    <%= text_field_tag "url", @experiment.url, :placeholder => "Url of experiment page" %>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Url</label>
-                <div class="controls">
-                    <%= select_tag "type", options_for_select(['Local', 'Global'], @experiment.type) %>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Description</label>
-                <div class="controls">
-                    <%= text_area_tag "description", @experiment.description, :placeholder => "What does this experiment test?", :rows=>"3" %>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Screenshot (optional)</label>
-                <div class="controls">
-                    <%= text_field_tag "screenshot", @experiment.screenshot_url, :placeholder => "URL" %>
-                </div>
-            </div>
-<%@experiment.global_tracked_kpis = ['ftb', 'ftg']%>
-<%@experiment.experiment_tracked_kpis = ['ftb', 'ftg']%>
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Tracked KPIs</label>
-                <div class="controls">
-              		<ul>
-									  <% @experiment.global_tracked_kpis.each do |kpi| %>
-									      <li>
-									        <%= check_box_tag 'global_tracked_kpis[]', kpi -%>
-									        <%= kpi -%>
-									      </li>
-									  <% end %>
-									</ul>
-                </div>
+                <label class="control-label" for="experiment_tracked_kpis">Experiment Tracked KPIs</label>
+                <% @experiment.experiment_tracked_kpis.each do |kpi| %>
+                    <%= text_field_tag 'experiment_tracked_kpis[]', kpi %>
+                <% end %>
+                <input id="experiment_tracked_kpis_" name="experiment_tracked_kpis[]" type="text" value="" class="js-configure-kpi-empty">
+                <a href="#" class="btn js-btn-configure-kpi-empty">Add</a>
             </div>
 
             <div class="actions">

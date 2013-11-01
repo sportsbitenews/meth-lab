@@ -93,6 +93,48 @@ h1 {
     }
 }
 
+.experiment-configure {
+
+    .control-group {
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .actions {
+        padding-top: 10px;
+    }
+
+    select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+        display: block;
+    }
+
+    input, textarea, .uneditable-input {
+        width: 306px;
+    }
+
+    input[type="file"], input[type="image"], input[type="submit"], input[type="reset"], input[type="button"], input[type="radio"], input[type="checkbox"] {
+        width: auto;
+    }
+
+    select {
+        width: 320px;
+    }
+
+    .js-configure-kpi-empty {
+        display: inline-block !important;
+        margin-bottom: 0;
+    }
+
+    .js-btn-configure-kpi-empty {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 5px;
+    }
+}
+
 .medium-space-from-top { margin-top: 30px; }
 .large-space-from-top { margin-top: 50px; }
 
