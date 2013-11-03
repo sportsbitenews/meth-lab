@@ -9,7 +9,9 @@
     	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
 		<code>ID: <%= @experiment.id %></code>
         <p class="subtitle clearfix">
-    		<span class="pull-right">Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)<%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+        <% if @experiment.start_time && @experiment.end_time %>
+    			<span class="pull-right">Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)<%=", Ended At #{nice_datetime(@experiment.end_time)}" %></span> 
+    		<% end %>
     		<% if @experiment.url.present? %>
     		  <span class="pull-left">Preview: <%= link_to 'Experiment', experiment_preview_url(@experiment), :target => :blank %> | <%= link_to 'Control', control_preview_url(@experiment), :target => :blank %></span> 
     		<% else %>

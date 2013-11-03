@@ -75,7 +75,9 @@ class ExperimentsController < ApplicationController
   end
 
   def new
-    @experiment = Lacmus::Experiment.new({})
+    @experiment  		 = Lacmus::Experiment.new({})
+    @global_kpis 		 = []
+    @experiment_kpis = []
 
     respond_to do |format|
       format.html # new.html.erb

@@ -21,7 +21,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="type">Url</label>
+                <label class="control-label" for="type">Type</label>
                 <%= select_tag "type", options_for_select(['Local', 'Global'], @experiment.type) %>
             </div>
 
@@ -32,7 +32,7 @@
 
             <div class="control-group">
                 <label class="control-label" for="screenshot">Screenshot (optional)</label>
-                <%= text_field_tag "screenshot", @experiment.screenshot_url, :placeholder => "URL" %>
+                <%= text_field_tag "screenshot_url", @experiment.screenshot_url, :placeholder => "URL of screenshot" %>
             </div>
 
             <div class="control-group">
