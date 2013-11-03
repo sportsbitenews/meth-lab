@@ -87,7 +87,9 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
-    @experiment = Lacmus::Experiment.find(params[:id])
+    @experiment 				 = Lacmus::Experiment.find(params[:id])
+    @tracked_global_kpis = ['ftb', 'ftg']
+    @tracked_exp_kpis    = ['clicking_some_action']
   end
 
   def validate_experiment

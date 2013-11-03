@@ -1,6 +1,9 @@
 development:
   max_experiment_duration_in_days: 60
   experiment_data_store: auto # cookie, redis, auto
+  global_kpis:
+    - ftb
+    - ftg
   fast_storage:
     host: 127.0.0.1
     port: 6379

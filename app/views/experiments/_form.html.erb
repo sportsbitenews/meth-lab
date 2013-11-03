@@ -1,4 +1,4 @@
-        
+
         <% if @experiment.errors.any? %>
             <div id="error_explanation" class="alert alert-block">
                 <h4><%= pluralize(@experiment.errors.count, "error") %> prohibited this dashboard from being saved:</h4>
@@ -35,14 +35,12 @@
                 <%= text_field_tag "screenshot", @experiment.screenshot_url, :placeholder => "URL" %>
             </div>
 
-            <% @experiment.global_tracked_kpis = ['ftb', 'ftg'] %>
-            <% @experiment.experiment_tracked_kpis = ['ftb', 'ftg'] %>
             <div class="control-group">
                 <label class="checkbox control-label">
                     <input id="global_tracked_kpis_" name="global_tracked_kpis[]" type="checkbox" value="all" class="js-configure-kpi-global">Global Tracked KPIs
                 </label>
                 <div class="controls">
-                    <% @experiment.global_tracked_kpis.each do |kpi| %>
+                    <% @tracked_global_kpis.each do |kpi| %>
                     <label class="checkbox">
                         <%= check_box_tag 'global_tracked_kpis[]', kpi %>
                         <%= kpi %>
@@ -53,7 +51,7 @@
 
             <div class="control-group">
                 <label class="control-label" for="experiment_tracked_kpis">Experiment Tracked KPIs</label>
-                <% @experiment.experiment_tracked_kpis.each do |kpi| %>
+                <% @tracked_local_kpis.each do |kpi| %>
                     <%= text_field_tag 'experiment_tracked_kpis[]', kpi %>
                 <% end %>
                 <input id="experiment_tracked_kpis_" name="experiment_tracked_kpis[]" type="text" value="" class="js-configure-kpi-empty">
