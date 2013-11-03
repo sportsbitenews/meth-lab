@@ -74,8 +74,6 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  # GET /experiments/new
-  # GET /experiments/new.json
   def new
     @experiment = Lacmus::Experiment.new({})
 
@@ -85,11 +83,11 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  # GET /experiments/1/edit
   def edit
-    @experiment 				 = Lacmus::Experiment.find(params[:id])
-    @tracked_global_kpis = ['ftb', 'ftg']
-    @tracked_exp_kpis    = ['clicking_some_action']
+    @experiment 		 = Lacmus::Experiment.find(params[:id])
+    tracked_kpis 		 = @experiment.tracked_kpis
+    @global_kpis 		 = tracked_kpis & Lacmus::Experiment::GLOBAL_TRACKED_KPIS
+    @experiment_kpis = tracked_kpis - @global_kpis
   end
 
   def validate_experiment
@@ -110,8 +108,6 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  # POST /experiments
-  # POST /experiments.experiment_idson
   def create
     @experiment = Lacmus::Experiment.new({})
     validate_experiment
@@ -146,6 +142,9 @@ class ExperimentsController < ApplicationController
     @experiment = Lacmus::Experiment.find(params[:id])
     validate_experiment
 
+    global_kpis 		= params[:global_kpis] || []
+    experiment_kpis = params[:experiment_kpis]
+
     if @experiment.errors.empty?
       @experiment.name 					 = params[:name]
       @experiment.type 					 = params[:type]
@@ -153,8 +152,7 @@ class ExperimentsController < ApplicationController
       @experiment.description 	 = params[:description]
       @experiment.screenshot_url = params[:screenshot_url]
       @experiment.type 					 = params[:type]
-      @experiment.global_tracked_kpis 		= params[:global_tracked_kpis]
-      @experiment.experiment_tracked_kpis = params[:experiment_tracked_kpis]
+      @experiment.tracked_kpis 	 = global_kpis.concat(experiment_kpis).reject(&:blank?)
       unless @experiment.save
         @experiment.errors << "failed to create experiment"
       end

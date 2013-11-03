@@ -37,12 +37,12 @@
 
             <div class="control-group">
                 <label class="checkbox control-label">
-                    <input id="global_tracked_kpis_" name="global_tracked_kpis[]" type="checkbox" value="all" class="js-configure-kpi-global">Global Tracked KPIs
+                    <input id="global_tracked_kpis_" name="global_kpis[]" type="checkbox" value="" class="js-configure-kpi-global">Global Tracked KPIs
                 </label>
                 <div class="controls">
-                    <% @tracked_global_kpis.each do |kpi| %>
+                    <% Lacmus::Experiment::GLOBAL_TRACKED_KPIS.each do |kpi| %>
                     <label class="checkbox">
-                        <%= check_box_tag 'global_tracked_kpis[]', kpi %>
+                        <%= check_box_tag 'global_kpis[]', kpi, @global_kpis.include?(kpi) %>
                         <%= kpi %>
                     </label>
                     <% end %>
@@ -50,11 +50,11 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="experiment_tracked_kpis">Experiment Tracked KPIs</label>
-                <% @tracked_local_kpis.each do |kpi| %>
-                    <%= text_field_tag 'experiment_tracked_kpis[]', kpi %>
+                <label class="control-label" for="experiment_kpis">Experiment Tracked KPIs</label>
+                <% @experiment_kpis.each do |kpi| %>
+                    <%= text_field_tag 'experiment_kpis[]', kpi %>
                 <% end %>
-                <input id="experiment_tracked_kpis_" name="experiment_tracked_kpis[]" type="text" value="" class="js-configure-kpi-empty">
+                <input id="experiment_kpis_" name="experiment_kpis[]" type="text" value="" class="js-configure-kpi-empty">
                 <a href="#" class="btn js-btn-configure-kpi-empty">Add</a>
             </div>
 
