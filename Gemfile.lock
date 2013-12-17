@@ -1,7 +1,7 @@
 GIT
   remote: git@github.com:fiverr/lacmus.git
-  revision: 2331034331bdf8eb5a94bab762cac72d0efd2171
-  tag: v0.3.2
+  revision: eda3578eb9845fd2cd5c49397da41aadc9914166
+  tag: v0.3.3
   specs:
     lacmus (0.2.1)
 
