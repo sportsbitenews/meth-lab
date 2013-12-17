@@ -12,6 +12,13 @@ module ExperimentsHelper
 		"#{experiment.url}?render-variation=control"
 	end
 
+	def force_experiment_cookie_url(experiment_id)
+		slot_ids 				= Lacmus::SlotMachine.experiment_slot_ids
+		amount_of_slots = slot_ids.size
+		slot_index 		  = slot_ids.index(experiment_id)
+		new_user_id     = amount_of_slots + slot_index
+		return "#{$lacmus_settings[:host]}/lacmus/get_exp?id=#{new_user_id}"
+	end
 
 	def class_for_goal_row(experiment, kpi)
 			performance_percent = experiment.performance_perc(kpi)

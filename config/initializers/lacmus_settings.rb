@@ -1,0 +1,1 @@
+$lacmus_settings = ActiveSupport::HashWithIndifferentAccess.new(YAML.load_file('config/lacmus.yml')[Rails.env.to_s])

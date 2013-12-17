@@ -9,7 +9,14 @@
     	<h1><%= @experiment.name.titleize if @experiment.name %></h1>
 		<code>ID: <%= @experiment.id %></code>
         <p class="subtitle clearfix">
-    		<span class="pull-right">Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)<%=", Ended At #{nice_datetime(@experiment.end_time)}" if @experiment.end_time %></span> 
+    		<span class="pull-right">
+    			<% if @experiment.start_time %>
+    				Started <%=time_ago_in_words(@experiment.start_time)%> ago (<%= nice_datetime(@experiment.start_time) %>)
+    			<% end %>
+    			<% if @experiment.end_time %>
+    				<%=", Ended At #{nice_datetime(@experiment.end_time)}" %>
+    			<% end %>
+    		</span> 
     		<% if @experiment.url.present? %>
     		  <span class="pull-left">Preview: <%= link_to 'Experiment', experiment_preview_url(@experiment), :target => :blank %> | <%= link_to 'Control', control_preview_url(@experiment), :target => :blank %></span> 
     		<% else %>
@@ -37,6 +44,9 @@
         <%= link_to "Destroy", delete_experiment_path(@experiment.id, :list=>'active'), :confirm => "Are you sure you want to permanently destroy this experiment and all its data?"%> | 
         <%= link_to "Conclude", conclude_experiment_path(@experiment.id), :confirm => "Are you sure you want to finish this experiment?"%> |
         <%= link_to "Grab Code", get_code_experiment_path(@experiment.id)%> |
+        <% if @experiment.active? %>
+        	<%= link_to "Get experiment", force_experiment_cookie_url(@experiment.id), :confirm => "Are you sure you want to be part of this experiment?", :target => "_blank"%> |
+        <% end %>
         <%= link_to "Reset", restart_experiment_path(@experiment.id), :confirm => "Are you sure you want to reset this experiment and loose all data collected so far?"%> |
         <%= link_to 'Back', experiments_path %>
     </footer>
