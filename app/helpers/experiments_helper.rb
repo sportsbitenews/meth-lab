@@ -17,7 +17,7 @@ module ExperimentsHelper
 		amount_of_slots = slot_ids.size
 		slot_index 		  = slot_ids.index(experiment_id)
 		new_user_id     = amount_of_slots + slot_index
-		return "#{$lacmus_settings[:host]}/lacmus/get_exp?id=#{new_user_id}"
+		return "#{$lacmus_settings[:host]}/lacmus/force_exp?id=#{new_user_id}"
 	end
 
 	def class_for_goal_row(experiment, kpi)
